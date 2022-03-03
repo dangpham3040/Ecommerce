@@ -19,6 +19,7 @@ import {
   View,
   FlatList,
   Image,
+  TouchableOpacity,
 
 } from 'react-native';
 
@@ -30,7 +31,8 @@ import SeachIcon from '../../icons/SeachIcon/SeachIcon'
 import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import UserIcon from '../../icons/UserIcon/UserIcon';
 import AddIcon from '../../icons/AddIcon/AddIcon';
-export default function App() {
+
+export default function App({ navigation }) {
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -52,38 +54,40 @@ export default function App() {
     },
   ];
   const ItemBottom = ({ title, dec, price }) => (
-    <View style={styles.itemBottom}>
-      <Image style={{ backgroundColor: "#DDDDE8", height: 33, width: 33, marginRight: 15 }} />
+    <TouchableOpacity style={styles.itemBottom} onPress={() => navigation.navigate('DetaiPage')} >
+      <Image source={require('../../pic/Minimal_Chair.png')} style={{ backgroundColor: "#DDDDE8", height: 66, width: 66, marginRight: 15 ,borderRadius:15}} />
       <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center', flex: 2 }}>
         <Text style={styles.title}>{title}</Text>
         <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.price}>{price}</Text>
-          <GotoIcon style={{ flex: 1, alignItems: "flex-end" }} />
+          <GotoIcon style={{ flex: 1, alignItems: "flex-end" }} onPress={() => navigation.navigate('DetaiPage')} />
         </View>
 
       </View>
 
-    </View>);
+    </TouchableOpacity>);
   const ItemAbove = ({ title, dec, price }) => (
-    <View style={styles.itemAbove}>
-      <Image style={{ backgroundColor: "#DDDDE8", height: 120, width:120 }} />
-      <Text style={styles.title,{justifyContent: 'flex-start'}}>{title}</Text>
+    <TouchableOpacity style={styles.itemAbove} onPress={() => navigation.navigate('DetaiPage')} >
+      <Image source={require('../../pic/Minimal_Chair.png')} style={{ backgroundColor: "#DDDDE8", height: 120, width: 120 ,borderRadius:15}} />
+      <Text style={styles.title, { justifyContent: 'flex-start' }}>{title}</Text>
       <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
       <View style={{ flexDirection: 'row' }}>
-      <Text style={{fontSize: 8,color:'#2A2D3F',flex: 2}}>{price}</Text>
-          <AddIcon style={{ flex: 1, alignItems: "flex-end" }} />
-        </View>
-    </View>);
+        <Text style={{ fontSize: 8, color: '#2A2D3F', flex: 2 }}>{price}</Text>
+        <AddIcon style={{ flex: 1, alignItems: "flex-end" }} />
+      </View>
+    </TouchableOpacity>
+  );
 
   const renderItem = ({ item }) => (
     <ItemBottom title={item.title} dec={item.dec} price={item.price} />
   );
   const renderItemAbove = ({ item }) => (
     <ItemAbove title={item.title} dec={item.dec} price={item.price} />
+
   );
   return (
-
+    <View style={{  flex :1 , backgroundColor: '#f5f6fa',}}>
     <SafeAreaView style={styles.container}>
       <View style={{ marginTop: 15, flexDirection: 'row', justifyContent: 'space-between', marginRight: 20 }}>
         <MenuIcon style={{ flex: 1 }} />
@@ -95,9 +99,8 @@ export default function App() {
           <TextInput
             style={styles.searchInput}
             placeholder="Seach" />
-
         </View>
-        <ShoppingCartsIcon style={{ marginTop: 50 }} />
+        <ShoppingCartsIcon style={{ marginTop: 50 }} onPress={() => navigation.navigate('CartPage')} />
       </View>
 
       <Text style={{ fontSize: 20, marginTop: 15, marginBottom: 9, color: "#2A2D3F" }}>Explore</Text>
@@ -117,19 +120,22 @@ export default function App() {
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
+    flex: 1,
     height: 50,
     width: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginRight: 20,
+   
   },
   container: {
-    backgroundColor: '#f5f6fa',
+    flex: 1,
+
     flexDirection: 'column',
     marginLeft: 30,
     marginRight: 30,
@@ -190,12 +196,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     flexDirection: 'row',
     backgroundColor: '#ffffff',
-    padding: 20,
+    padding: 10,
     marginVertical: 8,
     marginHorizontal: 16,
   },
   itemAbove: {
- 
+
     borderRadius: 20,
     flexDirection: 'column',
     backgroundColor: '#ffffff',

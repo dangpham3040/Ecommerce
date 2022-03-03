@@ -8,6 +8,7 @@
 
 import React, { useState } from 'react';
 
+
 import {
   SafeAreaView,
   ScrollView,
@@ -27,7 +28,7 @@ import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import CheckBox from 'react-native-check-box'
 
 
-export default function App() {
+export default function App({ navigation }) {
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -73,6 +74,7 @@ export default function App() {
 
   ];
   const [checked, setChecked] = useState(false);
+
   const Item = ({ title, dec, price }) => (
     <View style={styles.item}>
       <CheckBox
@@ -96,15 +98,15 @@ export default function App() {
   const renderItem = ({ item }) => (
     <Item title={item.title} price={item.price} />
   );
-  var imageURI = "https://designmap.gr/wp-content/uploads/2018/03/chair.png";
+
 
   return (
-
+   
     <SafeAreaView style={styles.container}>
-      <View style={styles.header,{justifyContent: 'space-between'}}>
-        <GoBackIcon style={{flex:1}}/>
+      <View style={styles.header}>
+        <GoBackIcon style={{ flex: 1, alignItems: "flex-start" }} onPress={() => navigation.navigate('HomePage')} />
         <Text style={{ color: "#2A2D3F", fontSize: 25, justifyContent: 'center', alignItems: 'center' }}>Cart</Text>
-        <ShoppingCartsIcon style={{flex:1}} />
+        <ShoppingCartsIcon />
       </View>
 
         <FlatList

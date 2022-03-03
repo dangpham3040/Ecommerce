@@ -2,30 +2,46 @@ import { StyleSheet } from "react-native";
 
 
 export const styles = StyleSheet.create({
+    header: {
+        height: 50,
+        width: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginRight: 20,
+    },
     container: {
-        flex: 1,
-        backgroundColor:'black',
-        // backgroundColor: Colors.seventh,
-        paddingHorizontal: 16
+        backgroundColor: '#f5f6fa',
+        flexDirection: 'column',
+        marginLeft: 30,
+        marginRight: 30,
+        paddingHorizontal: 16,
+    },
+    title: {
+        color: '#2A2D3F',
+        alignContent: 'center',
+        justifyContent: 'center',
     },
     searchView: {
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff',
+        borderRadius: 20,
         height: 40,
         flexDirection: "row",
+        flex: 5,
         marginTop: 40,
         borderWidth: 1,
-        // borderColor: Colors.third,
-        borderRadius: 5
+        borderRadius: 5,
+        marginRight: 20,
+        justifyContent: 'center'
     },
     icon: {
-        flex: 1,
+        flex: 2,
         alignItems: "center",
         justifyContent: "center"
     },
     searchInput: {
         flex: 8,
-        // fontFamily: Fonts.font_500,
         fontSize: 12,
-        // color: Colors.third,
         paddingBottom: 0,
         paddingTop: 0
     },
@@ -35,54 +51,55 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        // borderBottomColor: Colors.sixth,
+
+
         borderBottomWidth: 1
     },
     searchTextItem: {
-        // fontFamily: Fonts.font_400,
+
         fontSize: 14,
-        // color: Colors.eighth,
+
         marginVertical: 10
     },
     component: {
         marginTop: 24
     },
-    wantToEarn: {
-        // backgroundColor: Colors.third,
-        borderRadius: 5,
-        flexDirection: "row"
+
+
+    itemBottom: {
+        justifyContent: 'space-between',
+        borderRadius: 20,
+        flexDirection: 'row',
+        backgroundColor: '#ffffff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
     },
-    imageView: {
-        // height: scale(145),
-        // width: scale(145)
+    itemAbove: {
+
+        borderRadius: 20,
+        flexDirection: 'column',
+        backgroundColor: '#ffffff',
+        padding: 10,
+        marginHorizontal: 5,
     },
-    imageWantToEarn: {
+    goto: {
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        position: 'absolute'
+    },
+    searchIcon: {
+        marginLeft: 15,
+        marginRight: 15,
         height: "100%",
         width: "100%",
-        resizeMode: "cover",
-        borderTopLeftRadius: 5,
-        borderBottomLeftRadius: 5,
+        alignItems: 'center',
+        justifyContent: "flex-start"
+
     },
-    contentWantToEarn: {
-        flex: 1,
-        padding: 30,
-    },
-    textWantToEarn: {
-        // fontFamily: Fonts.font_700,
-        fontSize: 14,
-        // color: Colors.seventh,
-        alignItems: "center"
-    },
-    readMoreButton: {
-        alignItems: "baseline"
-    },
-    readMore: {
-        // backgroundColor: Colors.primary,
-        borderRadius: 3,
-        paddingVertical: 3,
-        paddingHorizontal: 15,
-        // fontFamily: Fonts.font_500,
-        fontSize: 10,
-        // color: Colors.seventh,
+    price:
+    {
+        color: "#2A2D3F", fontSize: 7, flex: 2
     }
 })
+
