@@ -35,6 +35,7 @@ import UserIcon from '../../icons/UserIcon/UserIcon';
 import AddIcon from '../../icons/AddIcon/AddIcon';
 import HeartIcon from '../../icons/HeartIcon/HeartIcon'
 import { styles } from './styles';
+import { useState } from 'react/cjs/react.production.min';
 export default function App({ navigation }) {
   const DATA = [
     {
@@ -56,8 +57,14 @@ export default function App({ navigation }) {
       dec: 'lorem Ipsum',
     },
   ];
+
   const ItemBottom = ({ title, dec, price }) => (
-    <TouchableOpacity style={styles.itemBottom} onPress={() => navigation.navigate('DetaiPage')} >
+    <TouchableOpacity style={styles.itemBottom} onPress={() =>
+      navigation.navigate('DetaiPage', {
+        title: title,
+        price: price,
+        dec: dec,
+      })} >
       <Image source={require('../../pic/Minimal_Chair.png')} style={styles.imageBottom} />
       <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center', flex: 2 }}>
         <Text style={styles.title}>{title}</Text>
@@ -71,9 +78,23 @@ export default function App({ navigation }) {
 
     </TouchableOpacity>);
   const ItemAbove = ({ title, dec, price }) => (
-    <TouchableOpacity style={styles.itemAbove} onPress={() => navigation.navigate('DetaiPage')} >
+    <TouchableOpacity style={styles.itemAbove} onPress={() =>
+      navigation.navigate('DetaiPage', {
+        title: title,
+        price: price,
+        dec: dec,
+      })
+
+    }>
       <ImageBackground source={require('../../pic/Minimal_Chair.png')} style={styles.imageAbove} >
-        <HeartIcon style={{ alignSelf: 'flex-end', marginTop: 10, marginRight: 10 }} />
+        <View style={{
+          flex: 1,
+          top: 5,
+          marginRight: 15,
+        }} >
+          <HeartIcon />
+        </View>
+
       </ImageBackground>
       <View style={{ flex: 2 }}>
         <Text style={styles.titleAbove}>{title}</Text>
@@ -87,7 +108,7 @@ export default function App({ navigation }) {
   );
 
   const renderItem = ({ item }) => (
-    <ItemBottom title={item.title} dec={item.dec} price={item.price} />
+    <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} />
   );
   const renderItemAbove = ({ item }) => (
     <ItemAbove title={item.title} dec={item.dec} price={item.price} />
@@ -111,7 +132,7 @@ export default function App({ navigation }) {
           <ShoppingCartsIcon style={{ marginTop: 45 }} onPress={() => navigation.navigate('CartPage')} />
         </View>
 
-        <Text style={{ fontSize: 20, marginTop: 15, marginBottom: 9, color: "#2A2D3F" }}>Explore</Text>
+        <Text style={styles.titleItem}>Explore</Text>
         <FlatList
           data={DATA}
           renderItem={renderItemAbove}
@@ -121,7 +142,7 @@ export default function App({ navigation }) {
           scrollEnabled
           showsHorizontalScrollIndicator={false}
         />
-        <Text style={{ fontSize: 20, marginTop: 15, marginBottom: 9, color: "#2A2D3F" }}>Best Selling</Text>
+        <Text style={styles.titleItem}>Best Selling</Text>
         <FlatList
           data={DATA}
           renderItem={renderItem}

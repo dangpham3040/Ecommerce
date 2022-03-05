@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        marginLeft: 30,
-        marginRight: 30,
+        marginLeft: 20,
+        marginRight: 20,
         paddingHorizontal: 16,
     },
     title: {
@@ -137,5 +137,12 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontWeight: 'bold',
         justifyContent: 'flex-start'
+    },
+    titleItem: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        marginTop: 15,
+        marginBottom: 9,
+        color: "#2A2D3F"
     }
 });
