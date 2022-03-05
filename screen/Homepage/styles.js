@@ -1,16 +1,15 @@
 import { StyleSheet } from "react-native";
-
-
 export const styles = StyleSheet.create({
     header: {
+        flex: 1,
         height: 50,
         width: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginRight: 20,
+
     },
     container: {
-        backgroundColor: '#f5f6fa',
+        flex: 1,
         flexDirection: 'column',
         marginLeft: 30,
         marginRight: 30,
@@ -20,6 +19,8 @@ export const styles = StyleSheet.create({
         color: '#2A2D3F',
         alignContent: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+
     },
     searchView: {
         backgroundColor: '#ffffff',
@@ -32,7 +33,12 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         marginRight: 20,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadiusr: 10,
+        borderBottomRightRadius: 10,
+
     },
     icon: {
         flex: 2,
@@ -43,7 +49,7 @@ export const styles = StyleSheet.create({
         flex: 8,
         fontSize: 12,
         paddingBottom: 0,
-        paddingTop: 0
+        paddingTop: 0,
     },
     searchItem: {
         paddingHorizontal: 16,
@@ -71,12 +77,12 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         flexDirection: 'row',
         backgroundColor: '#ffffff',
-        padding: 20,
+        padding: 10,
         marginVertical: 8,
         marginHorizontal: 16,
     },
     itemAbove: {
-
+        flex: 1,
         borderRadius: 20,
         flexDirection: 'column',
         backgroundColor: '#ffffff',
@@ -99,7 +105,37 @@ export const styles = StyleSheet.create({
     },
     price:
     {
-        color: "#2A2D3F", fontSize: 7, flex: 2
+        fontSize: 15,
+        color: "#2A2D3F",
+        flex: 2,
+    },
+    imageBottom: {
+        backgroundColor: "#DDDDE8",
+        height: 66,
+        width: 66,
+        marginRight: 15,
+        borderRadius: 15
+    },
+    imageAbove: {
+        backgroundColor: "#DDDDE8",
+        height: 150, width: 150,
+        borderRadius: 15,
+        marginBottom: 40,
+        alignItems: 'flex-end',
+        flexWrap: 'wrap-reverse',
+        direction: 'inherit'
+    },
+    headerIcon: {
+        marginTop: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    titleAbove: {
+        color: '#2A2D3F',
+        alignContent: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        fontWeight: 'bold',
+        justifyContent: 'flex-start'
     }
-})
-
+});

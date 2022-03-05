@@ -1,90 +1,115 @@
 import { StyleSheet } from "react-native";
-// import { Colors } from "../../Utils/Color";
-// import { Fonts } from "../../Utils/Fonts";
-// import { scale } from 'react-native-size-matters';
-
 export const styles = StyleSheet.create({
-    container: {
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         flex: 1,
-        backgroundColor:'black',
-        // backgroundColor: Colors.seventh,
-        paddingHorizontal: 16
-    },
-    searchView: {
+        paddingHorizontal: 20,
+        paddingBottom: 50,
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
+        direction: 'inherit',
+      },
+      container: {
+        backgroundColor: '#f5f6fa',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%',
+      },
+      title: {
+        color: '#fff',
+        alignContent: 'center',
+        justifyContent: 'center',
+        fontSize: 25
+    
+      },
+      searchView: {
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff',
+        borderRadius: 20,
         height: 40,
         flexDirection: "row",
+        flex: 5,
         marginTop: 40,
         borderWidth: 1,
-        // borderColor: Colors.third,
-        borderRadius: 5
-    },
-    icon: {
-        flex: 1,
+        borderRadius: 5,
+        marginRight: 20,
+        justifyContent: 'center'
+      },
+      icon: {
+        flex: 2,
         alignItems: "center",
         justifyContent: "center"
-    },
-    searchInput: {
+      },
+      searchInput: {
         flex: 8,
-        // fontFamily: Fonts.font_500,
         fontSize: 12,
-        // color: Colors.third,
         paddingBottom: 0,
         paddingTop: 0
-    },
-    searchItem: {
+      },
+      searchItem: {
         paddingHorizontal: 16,
         flex: 1,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        // borderBottomColor: Colors.sixth,
+    
+    
         borderBottomWidth: 1
-    },
-    searchTextItem: {
-        // fontFamily: Fonts.font_400,
+      },
+      searchTextItem: {
+    
         fontSize: 14,
-        // color: Colors.eighth,
+    
         marginVertical: 10
-    },
-    component: {
+      },
+      component: {
         marginTop: 24
-    },
-    wantToEarn: {
-        // backgroundColor: Colors.third,
-        borderRadius: 5,
-        flexDirection: "row"
-    },
-    imageView: {
-        // height: scale(145),
-        // width: scale(145)
-    },
-    imageWantToEarn: {
+      },
+    
+    
+      itemBottom: {
+        justifyContent: 'space-between',
+        borderRadius: 20,
+        flexDirection: 'row',
+        backgroundColor: '#ffffff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+      },
+      itemAbove: {
+    
+        borderRadius: 20,
+        flexDirection: 'column',
+        backgroundColor: '#ffffff',
+        padding: 10,
+        marginHorizontal: 5,
+      },
+      goto: {
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        position: 'absolute'
+      },
+      searchIcon: {
+        marginLeft: 15,
+        marginRight: 15,
         height: "100%",
         width: "100%",
-        resizeMode: "cover",
-        borderTopLeftRadius: 5,
-        borderBottomLeftRadius: 5,
-    },
-    contentWantToEarn: {
-        flex: 1,
-        padding: 30,
-    },
-    textWantToEarn: {
-        // fontFamily: Fonts.font_700,
-        fontSize: 14,
-        // color: Colors.seventh,
-        alignItems: "center"
-    },
-    readMoreButton: {
-        alignItems: "baseline"
-    },
-    readMore: {
-        // backgroundColor: Colors.primary,
-        borderRadius: 3,
-        paddingVertical: 3,
-        paddingHorizontal: 15,
-        // fontFamily: Fonts.font_500,
-        fontSize: 10,
-        // color: Colors.seventh,
-    }
-})
+        alignItems: 'center',
+        justifyContent: "flex-start"
+    
+      },
+      price:
+      {
+        color: "#2A2D3F", fontSize: 7, flex: 2
+      },
+      checkoutBottom:
+      {
+        flex: 2.25,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        paddingHorizontal: 20,
+        paddingVertical: 30
+      }
+    });
