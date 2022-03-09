@@ -19,6 +19,8 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     fontWeight: 'bold',
+    fontSize:20,
+    fontWeight:"bold", 
   },
   searchView: {
     height: 40,
