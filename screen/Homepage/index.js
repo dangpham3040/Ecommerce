@@ -25,8 +25,6 @@ import {
 
 } from 'react-native';
 
-
-
 import GotoIcon from '../../icons/GotoIcon/GotoIcon'
 import MenuIcon from '../../icons/MenuIcon/MenuIcon'
 import SeachIcon from '../../icons/SeachIcon/SeachIcon'
@@ -35,37 +33,41 @@ import UserIcon from '../../icons/UserIcon/UserIcon';
 import AddIcon from '../../icons/AddIcon/AddIcon';
 import HeartIcon from '../../icons/HeartIcon/HeartIcon'
 import { styles } from './styles';
-import { useState } from 'react/cjs/react.production.min';
-export default function App({ navigation }) {
+
+export default function App({ navigation, route }) {
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
+      title: 'Minimal Chair 1',
       price: '$25.00',
       dec: 'lorem Ipsum',
+      pic: require('../../pic/Minimal_Chair.png'),
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
+      title: 'Elegant White Chair',
       price: '$25.00',
       dec: 'lorem Ipsum',
+      pic: require('../../pic/Elegant_White_Chair.jpg'),
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
+      title: 'Minimal Chair 3',
       price: '$25.00',
       dec: 'lorem Ipsum',
+      pic: require('../../pic/Vintage_Chair.jpg'),
     },
   ];
 
-  const ItemBottom = ({ title, dec, price }) => (
+  const ItemBottom = ({ title, dec, price, pic }) => (
     <TouchableOpacity style={styles.itemBottom} onPress={() =>
       navigation.navigate('DetaiPage', {
         title: title,
         price: price,
         dec: dec,
+        pic: pic,
       })} >
-      <Image source={require('../../pic/Minimal_Chair.png')} style={styles.imageBottom} />
+      <Image source={pic} style={styles.imageBottom} />
       <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center', flex: 2 }}>
         <Text style={styles.title}>{title}</Text>
         <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
@@ -73,24 +75,22 @@ export default function App({ navigation }) {
           <Text style={styles.price}>{price}</Text>
           <GotoIcon style={{ flex: 1, alignItems: "flex-end" }} onPress={() => navigation.navigate('DetaiPage')} />
         </View>
-
       </View>
-
-    </TouchableOpacity>);
-  const ItemAbove = ({ title, dec, price }) => (
+    </TouchableOpacity>
+  );
+  const ItemAbove = ({ title, dec, price, pic }) => (
     <TouchableOpacity style={styles.itemAbove} onPress={() =>
       navigation.navigate('DetaiPage', {
         title: title,
         price: price,
         dec: dec,
-      })
-
-    }>
-      <ImageBackground source={require('../../pic/Minimal_Chair.png')} style={styles.imageAbove} >
+        pic: pic,
+      })}>
+      <ImageBackground source={pic} style={styles.imageAbove} >
         <View style={{
           flex: 1,
           top: 5,
-          marginRight: 15,
+          marginRight: 5,
         }} >
           <HeartIcon />
         </View>
@@ -108,10 +108,10 @@ export default function App({ navigation }) {
   );
 
   const renderItem = ({ item }) => (
-    <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} />
+    <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} />
   );
   const renderItemAbove = ({ item }) => (
-    <ItemAbove title={item.title} dec={item.dec} price={item.price} />
+    <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} />
 
   );
   return (
@@ -120,7 +120,8 @@ export default function App({ navigation }) {
         <StatusBar hidden />
         <View style={styles.headerIcon}>
           <MenuIcon style={{ flex: 1 }} />
-          <UserIcon style={{ flex: 1 }} /></View>
+          <UserIcon style={{ flex: 1 }} />
+        </View>
 
         <View style={{ flexDirection: "row" }}>
           <View style={styles.searchView}>

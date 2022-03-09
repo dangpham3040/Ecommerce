@@ -118,7 +118,7 @@ export const styles = StyleSheet.create({
     },
     imageAbove: {
         backgroundColor: "#DDDDE8",
-        height: 150, width: 150,
+        height: 145, width: 145,
         borderRadius: 15,
         marginBottom: 40,
         alignItems: 'flex-end',

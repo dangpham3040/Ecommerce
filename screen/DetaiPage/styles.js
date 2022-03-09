@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flexWrap: 'wrap',
     direction: 'inherit',
-
+    
   },
   container: {
     backgroundColor: '#f5f6fa',
@@ -124,15 +124,19 @@ export const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   AddCartIcon: {
-    flexDirection: 'column',
-    alignContent: 'flex-end',
-    flex: 2,
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    flex: 1,
+    flex:1,
+    borderRadius: 10,
+    backgroundColor: '#2A2D3F',
+    borderTopLeftRadius: 200,
+    borderBottomRightRadius: 200,
+    alignContent: 'center',
+    alignItems: "center",
     position: 'absolute',
     bottom: 0,
     right: 0,
+    padding:20,
+    width: "50%",
+    height: "18%",
   },
   HeartLike:{
     flexDirection: 'column',

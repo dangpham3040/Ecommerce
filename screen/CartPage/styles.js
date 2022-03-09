@@ -4,17 +4,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flex: 1,
     paddingHorizontal: 20,
-    paddingBottom: 50
+    paddingBottom: 50,
+    top: 20,
   },
   container: {
+    flex: 1,
     justifyContent: 'space-between',
     backgroundColor: '#f5f6fa',
     flexDirection: 'column',
-    marginLeft: 20,
-    marginRight: 20,
-    paddingHorizontal: 16,
   },
   title: {
     color: "#2A2D3F",
@@ -82,15 +80,35 @@ export const styles = StyleSheet.create({
   },
 
   item: {
-
+    alignContent: 'center',
+    justifyContent: 'center',
     flex: 1,
     borderRadius: 20,
     flexDirection: 'row',
-    backgroundColor: '#ffffff',
+    backgroundColor: '##F5F6FA',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
   },
+
+  bottomCheckout: {
+    flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, paddingTop:10,
+  },
+  line:{
+    borderBottomColor: '#e1e1ea',
+    borderBottomWidth: 1,
+  },
+  CheckOutButton:
+  {
+    backgroundColor: '#2A2D3F',
+    width: '100%',
+    height: '30%',
+    borderRadius: 50,
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    bottom: 20,
+  }
 });
 
 

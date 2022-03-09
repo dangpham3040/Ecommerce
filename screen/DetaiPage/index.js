@@ -10,19 +10,12 @@ import React from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  TextInput,
-  useColorScheme,
   View,
-  FlatList,
-  Image,
   ImageBackground,
+  
 
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 import { styles } from './styles';
 import AddCartIcon from '../../icons/AddCartIcon/AddCartIcon';
 import GoBackIcon from '../../icons/GoBackIcon/GoBackIcon'
@@ -31,8 +24,9 @@ import HeartLikeIcon from '../../icons/HeartLikeIcon/HeartLikeIcon';
 import RatingStar from '../../icons/RatingStar/RatingStar';
 import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableHighlight} from 'react-native-gesture-handler'
 
-
+const image = { uri: "https://reactjs.org/logo-og.png" };
 export default function App({ navigation, route }) {
 
   return (
@@ -71,9 +65,11 @@ export default function App({ navigation, route }) {
             cing elit, sed diam nonummy nibh euismod tincid
             unt ut
             laoreet dolore magna.</Text>
+
         </View>
-        <View style={styles.AddCartIcon}>
-          <AddCartIcon  onPress={()=>alert('wellcome ')}/>
+
+        <View style={styles.AddCartIcon} >
+          <Text style={{color:'#fff'}}>+  Add to Cart </Text>
         </View>
 
 
