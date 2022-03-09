@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
- import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   SafeAreaView,
@@ -22,7 +22,6 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-
 import GotoIcon from '../../icons/GotoIcon/GotoIcon'
 import MenuIcon from '../../icons/MenuIcon/MenuIcon'
 import SeachIcon from '../../icons/SeachIcon/SeachIcon'
@@ -58,6 +57,37 @@ export default function App({ navigation, route }) {
     },
   ];
   const [listitem, setlistitem] = useState([]);
+  const [seach, setseach] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const handleSearch = () => {
+    for (var i = 0; i < listitem.length; i++) {
+      const ds = [];
+      if (seach === listitem[i].title) {
+        ds.push(listitem[i]);
+      }
+      else if (ds.length == 0) {
+        ds = listitem;
+      }
+      setlistitem(ds);
+    }
+  }
+
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = listitem.filter(function (item) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setseach(text);
+    } else {
+      setFilteredDataSource(listitem);
+      setseach(text);
+    }
+  };
   const ItemBottom = ({ title, dec, price, pic }) => (
     <TouchableOpacity style={styles.itemBottom} onPress={() =>
       navigation.navigate('DetaiPage', {
@@ -114,7 +144,6 @@ export default function App({ navigation, route }) {
   );
   const storeData = async (value) => {
     try {
-      
       await AsyncStorage.setItem('list', JSON.stringify(DATA))
     } catch (e) {
       console.log(e);
@@ -124,7 +153,7 @@ export default function App({ navigation, route }) {
     try {
       const value = await AsyncStorage.getItem('list')
       return value != null ? setlistitem(JSON.parse(value)) : null
-  
+
     } catch (e) {
       console.log(e);
     }
@@ -146,28 +175,45 @@ export default function App({ navigation, route }) {
           <View style={styles.searchView}>
             <SeachIcon style={{ margin: 10 }} />
             <TextInput
+              onChangeText={(text) => searchFilterFunction(text)}
               style={styles.searchInput}
               placeholder="Seach" />
           </View>
           <ShoppingCartsIcon style={{ marginTop: 45 }} onPress={() => navigation.navigate('CartPage')} />
         </View>
 
-        <Text style={styles.titleItem}>Explore</Text>
-        <FlatList
-          data={listitem}
-          renderItem={renderItemAbove}
-          keyExtractor={item => item.id}
-          numColumns={1}
-          horizontal={true}
-          scrollEnabled
-          showsHorizontalScrollIndicator={false}
-        />
-        <Text style={styles.titleItem}>Best Selling</Text>
-        <FlatList
-          data={listitem}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+
+        {
+          seach === "" ?
+            <View style={{ flex: 2 }}>
+              <Text style={styles.titleItem}>Explore</Text>
+              <FlatList
+                style={{ flex: 1 }}
+                data={listitem}
+                renderItem={renderItemAbove}
+                keyExtractor={item => item.id}
+                numColumns={1}
+                horizontal={true}
+                scrollEnabled
+                showsHorizontalScrollIndicator={false}
+              />
+              <Text style={styles.titleItem}>Best Selling</Text>
+              <FlatList
+                style={{ flex: 1 }}
+                data={listitem}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+              />
+            </View>
+            :
+            <FlatList
+              style={{ marginTop: 20 }}
+              data={filteredDataSource}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+
+        }
       </SafeAreaView>
     </View>
   );

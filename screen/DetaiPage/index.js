@@ -23,12 +23,9 @@ import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import HeartLikeIcon from '../../icons/HeartLikeIcon/HeartLikeIcon';
 import RatingStar from '../../icons/RatingStar/RatingStar';
 import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function App({ navigation, route }) {
-
   return (
-
     <SafeAreaView style={styles.container}>
       <View style={{
         flex: 3,
@@ -38,7 +35,6 @@ export default function App({ navigation, route }) {
       }}>
         <ImageBackground style={styles.header} source={require('../../pic/Minimal_Chair.png')}>
         <GoBackIcon onPress={() => navigation.navigate('HomePage')} />
-
           <Text style={styles.titleProduct}>Product</Text>
           <ShoppingCartsIcon />
         </ImageBackground>

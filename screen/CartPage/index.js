@@ -59,7 +59,7 @@ export default function App({ navigation }) {
     else {
       setChecked(true);
     }
-    alert("Số lượng đã chọn "+list_choose.length);
+    alert("Số lượng đã chọn " + list_choose.length);
   }
 
   const [num, setnum] = useState(1);
@@ -67,7 +67,7 @@ export default function App({ navigation }) {
     list_choose.push(value);
   }
   const handlremovechoose = (value) => {
-    list_choose.slice(value,1);
+    list_choose.slice(value, 1);
   }
   const handladd = () => {
     setnum(num + 1);
@@ -101,6 +101,7 @@ export default function App({ navigation }) {
   const renderItem = ({ item }) => (
     <Item title={item.title} price={item.price} pic={item.pic} />
   );
+ 
   const storeData = async () => {
     try {
       await AsyncStorage.setItem('list', JSON.stringify(DATA))
@@ -111,6 +112,22 @@ export default function App({ navigation }) {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('list')
+      return value != null ? setlistitem(JSON.parse(value)) : null
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const storeData_choose = async () => {
+    try {
+      await AsyncStorage.setItem('list_choose', JSON.stringify(DATA))
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const getData_choose = async () => {
+    try {
+      const value = await AsyncStorage.getItem('list_choose')
       return value != null ? setlistitem(JSON.parse(value)) : null
 
     } catch (e) {
@@ -130,7 +147,6 @@ export default function App({ navigation }) {
         marginRight: 10,
       }}>
         <View>
-
         </View>
         <View style={styles.header}>
           <GoBackIcon onPress={() => navigation.navigate('HomePage')} />

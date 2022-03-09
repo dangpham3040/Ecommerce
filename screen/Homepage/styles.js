@@ -73,6 +73,7 @@ export const styles = StyleSheet.create({
 
 
     itemBottom: {
+        flex:1,
         justifyContent: 'space-between',
         borderRadius: 20,
         flexDirection: 'row',
