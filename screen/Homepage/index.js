@@ -10,12 +10,9 @@ import React, { useEffect, useState } from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
   TextInput,
-  useColorScheme,
   View,
   FlatList,
   Image,
@@ -169,8 +166,6 @@ export default function App({ navigation, route }) {
           </View>
           <ShoppingCartsIcon style={{ marginTop: 45 }} onPress={() => navigation.navigate('CartPage')} />
         </View>
-
-
         {
           seach === "" ?
             <View style={{ flex: 2 }}>
@@ -194,13 +189,16 @@ export default function App({ navigation, route }) {
               />
             </View>
             :
-            <FlatList
-              style={{ marginTop: 20 }}
-              data={filteredDataSource}
-              renderItem={renderItem}
-              keyExtractor={item => item.id}
-            />
-
+            <View style={{ marginTop: 20 }}>
+              <Text style={styles.title}>Seach result</Text>
+              <FlatList
+                numColumns={1}
+                style={{ marginTop: 20 }}
+                data={filteredDataSource}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+              />
+            </View>
         }
       </SafeAreaView>
     </View>
