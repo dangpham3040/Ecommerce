@@ -59,20 +59,9 @@ export default function App({ navigation, route }) {
   const [listitem, setlistitem] = useState([]);
   const [seach, setseach] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const handleSearch = () => {
-    for (var i = 0; i < listitem.length; i++) {
-      const ds = [];
-      if (seach === listitem[i].title) {
-        ds.push(listitem[i]);
-      }
-      else if (ds.length == 0) {
-        ds = listitem;
-      }
-      setlistitem(ds);
-    }
-  }
 
-  const searchFilterFunction = (text) => {
+
+  const handleSearch = (text) => {
     if (text) {
       const newData = listitem.filter(function (item) {
         const itemData = item.title
@@ -142,7 +131,7 @@ export default function App({ navigation, route }) {
   const renderItemAbove = ({ item }) => (
     <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} />
   );
-  const storeData = async (value) => {
+  const storeData = async () => {
     try {
       await AsyncStorage.setItem('list', JSON.stringify(DATA))
     } catch (e) {
@@ -152,14 +141,13 @@ export default function App({ navigation, route }) {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('list')
-      return value != null ? setlistitem(JSON.parse(value)) : null
-
+      return value != null ? setlistitem(JSON.parse(value)) : []
     } catch (e) {
       console.log(e);
     }
   }
   useEffect(() => {
-    storeData(DATA)
+    storeData()
     getData()
   }, [])
   return (
@@ -175,7 +163,7 @@ export default function App({ navigation, route }) {
           <View style={styles.searchView}>
             <SeachIcon style={{ margin: 10 }} />
             <TextInput
-              onChangeText={(text) => searchFilterFunction(text)}
+              onChangeText={(text) => handleSearch(text)}
               style={styles.searchInput}
               placeholder="Seach" />
           </View>

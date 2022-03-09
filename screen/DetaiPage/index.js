@@ -24,7 +24,9 @@ import HeartLikeIcon from '../../icons/HeartLikeIcon/HeartLikeIcon';
 import RatingStar from '../../icons/RatingStar/RatingStar';
 import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
 
+
 export default function App({ navigation, route }) {
+  console.log(route.params.pic);
   return (
     <SafeAreaView style={styles.container}>
       <View style={{

@@ -83,17 +83,19 @@ export default function App({ navigation }) {
         {
           checked ? <CheckedIcon style={{ marginRight: 15 }} onPress={handleCheck} /> : <UnCheck style={{ marginRight: 15 }} onPress={handleCheck} />
         }
-        <Image source={pic} style={{ backgroundColor: "#DDDDE8", height: 65, width: 65, marginRight: 15 }} />
-        <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center' }}>
+        <Image source={pic} style={{ flex: 1, backgroundColor: "#DDDDE8", height: 70, width: 70, marginRight: 15 }} />
+        <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, alignContent: 'center' }}>
           <Text style={styles.title}>{title}</Text>
           <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
-          <Text style={{ color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>{price}</Text>
-        </View>
-        <View style={styles.add_del}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text onPress={handladd}>+</Text>
-            <Text >{num}</Text>
-            <Text onPress={handldel}>-</Text>
+          <View style={{ flexDirection: 'row', marginLeft: 15, alignContent: 'space-between' }}>
+            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>{price}</Text>
+            <View style={styles.add_del}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text onPress={handladd}>+</Text>
+                <Text >{num}</Text>
+                <Text onPress={handldel}>-</Text>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -101,7 +103,7 @@ export default function App({ navigation }) {
   const renderItem = ({ item }) => (
     <Item title={item.title} price={item.price} pic={item.pic} />
   );
- 
+
   const storeData = async () => {
     try {
       await AsyncStorage.setItem('list', JSON.stringify(DATA))
@@ -137,6 +139,9 @@ export default function App({ navigation }) {
   useEffect(() => {
     storeData()
     getData()
+    storeData_choose()
+    getData_choose()
+
   }, [])
   return (
     <SafeAreaView style={styles.container}>

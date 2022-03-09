@@ -112,21 +112,26 @@ export const styles = StyleSheet.create({
     bottom: 20,
   },
   add_del: {
-    position: 'absolute',
+    margin: 5,
+    borderWidth: 3,
+    borderColor: "#dddde8",
+    alignContent: "center",
+    marginLeft: 10,
+    marginTop: 5,
     backgroundColor: '#fff',
-    width: '15%',
-    height: '25%',
+    width: '35%',
+    height: '70%',
     borderRadius: 50,
     borderColor: '#DDDDE8',
-    right: 15,
   },
-  backgroundBottom:{
+  backgroundBottom: {
     flex: 1,
     backgroundColor: '#fff',
     borderTopLeftRadius: 45,
     borderTopRightRadius: 45,
     paddingHorizontal: 30,
-    paddingVertical: 30
+    paddingVertical: 30,
+
   }
 });
 
