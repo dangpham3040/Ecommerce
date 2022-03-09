@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 import {
@@ -16,17 +16,15 @@ import {
   View,
   FlatList,
   Image,
+
 } from 'react-native';
 import GoBackIcon from '../../icons/GoBackIcon/GoBackIcon'
 import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
-import CheckBox from 'react-native-check-box'
 import { styles } from './styles';
 import UnCheck from '../../icons/UnCheck/UnCheck';
-import CheckOutButtonIcon from '../../icons/CheckOutButtonIcon/CheckOutButtonIcon';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { JumpingTransition } from 'react-native-reanimated';
 import CheckedIcon from '../../icons/CheckedIcon/CheckedIcon';
-import MenuIcon from '../../icons/MenuIcon/MenuIcon';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function App({ navigation }) {
   const DATA = [
     {
@@ -51,7 +49,8 @@ export default function App({ navigation }) {
       pic: require('../../pic/Vintage_Chair.jpg'),
     },
   ];
-
+  const [listitem, setlistitem] = useState([]);
+  const [list_choose, setlist] = useState([]);
   const [checked, setChecked] = useState(false);
   const handleCheck = () => {
     if (checked === true) {
@@ -60,19 +59,26 @@ export default function App({ navigation }) {
     else {
       setChecked(true);
     }
-
+    alert("Số lượng đã chọn "+list_choose.length);
   }
+
   const [num, setnum] = useState(1);
+  const handladdtochoose = (value) => {
+    list_choose.push(value);
+  }
+  const handlremovechoose = (value) => {
+    list_choose.slice(value,1);
+  }
   const handladd = () => {
     setnum(num + 1);
   }
   const handldel = () => {
-    setnum(num - 1);
+    if (num > 0) {
+      setnum(num - 1);
+    }
   }
   const Item = ({ title, dec, price, pic }) => (
     <View style={styles.item}>
-      {/* <CheckBox onPress={setChecked} /> */}
-
       <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
         {
           checked ? <CheckedIcon style={{ marginRight: 15 }} onPress={handleCheck} /> : <UnCheck style={{ marginRight: 15 }} onPress={handleCheck} />
@@ -83,28 +89,38 @@ export default function App({ navigation }) {
           <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
           <Text style={{ color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>{price}</Text>
         </View>
-        <View style={{
-          position: 'absolute',
-          backgroundColor: '#fff',
-          width: '15%',
-          height: '25%',
-          borderRadius: 50,
-          borderColor: '#DDDDE8',
-          right: 15,
-        }}>
+        <View style={styles.add_del}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text onPress={handladd}>+</Text>
             <Text >{num}</Text>
             <Text onPress={handldel}>-</Text>
           </View>
-
         </View>
-
       </View>
     </View >);
   const renderItem = ({ item }) => (
     <Item title={item.title} price={item.price} pic={item.pic} />
   );
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem('list', JSON.stringify(DATA))
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('list')
+      return value != null ? setlistitem(JSON.parse(value)) : null
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  useEffect(() => {
+    storeData()
+    getData()
+  }, [])
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
@@ -123,20 +139,13 @@ export default function App({ navigation }) {
         </View>
         <FlatList
           nestedScrollEnabled
-          data={DATA}
+          data={listitem}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
 
       </View>
-      <View style={{
-        flex: 1,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 45,
-        borderTopRightRadius: 45,
-        paddingHorizontal: 30,
-        paddingVertical: 30
-      }} >
+      <View style={styles.backgroundBottom} >
         <View style={styles.bottomCheckout}>
           <Text style={{ color: "#2A2D3F", flex: 4 }}>Selected Items</Text>
           <Text style={{

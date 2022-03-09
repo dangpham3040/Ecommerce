@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     fontWeight: 'bold',
-    fontSize:20,
-    fontWeight:"bold", 
+    fontSize: 20,
+    fontWeight: "bold",
   },
   searchView: {
     height: 40,
@@ -94,9 +94,9 @@ export const styles = StyleSheet.create({
   },
 
   bottomCheckout: {
-    flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, paddingTop:10,
+    flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, paddingTop: 10,
   },
-  line:{
+  line: {
     borderBottomColor: '#e1e1ea',
     borderBottomWidth: 1,
   },
@@ -110,6 +110,23 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     bottom: 20,
+  },
+  add_del: {
+    position: 'absolute',
+    backgroundColor: '#fff',
+    width: '15%',
+    height: '25%',
+    borderRadius: 50,
+    borderColor: '#DDDDE8',
+    right: 15,
+  },
+  backgroundBottom:{
+    flex: 1,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 45,
+    borderTopRightRadius: 45,
+    paddingHorizontal: 30,
+    paddingVertical: 30
   }
 });
 

@@ -17,16 +17,14 @@ import {
 
 } from 'react-native';
 import { styles } from './styles';
-import AddCartIcon from '../../icons/AddCartIcon/AddCartIcon';
+
 import GoBackIcon from '../../icons/GoBackIcon/GoBackIcon'
 import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import HeartLikeIcon from '../../icons/HeartLikeIcon/HeartLikeIcon';
 import RatingStar from '../../icons/RatingStar/RatingStar';
 import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import {TouchableHighlight} from 'react-native-gesture-handler'
 
-const image = { uri: "https://reactjs.org/logo-og.png" };
 export default function App({ navigation, route }) {
 
   return (
@@ -39,9 +37,7 @@ export default function App({ navigation, route }) {
 
       }}>
         <ImageBackground style={styles.header} source={require('../../pic/Minimal_Chair.png')}>
-          <TouchableOpacity onPress={() => navigation.navigate('HomePage')} >
-            <GoBackIcon />
-          </TouchableOpacity>
+        <GoBackIcon onPress={() => navigation.navigate('HomePage')} />
 
           <Text style={styles.titleProduct}>Product</Text>
           <ShoppingCartsIcon />
@@ -71,8 +67,6 @@ export default function App({ navigation, route }) {
         <View style={styles.AddCartIcon} >
           <Text style={{color:'#fff'}}>+  Add to Cart </Text>
         </View>
-
-
       </View>
     </SafeAreaView>
   );

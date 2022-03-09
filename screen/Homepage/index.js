@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+ import React, { useEffect, useState } from 'react';
 
 import {
   SafeAreaView,
@@ -21,8 +21,6 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
-
-
 } from 'react-native';
 
 import GotoIcon from '../../icons/GotoIcon/GotoIcon'
@@ -33,12 +31,13 @@ import UserIcon from '../../icons/UserIcon/UserIcon';
 import AddIcon from '../../icons/AddIcon/AddIcon';
 import HeartIcon from '../../icons/HeartIcon/HeartIcon'
 import { styles } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App({ navigation, route }) {
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'Minimal Chair 1',
+      title: 'Minimal Chair ',
       price: '$25.00',
       dec: 'lorem Ipsum',
       pic: require('../../pic/Minimal_Chair.png'),
@@ -52,13 +51,13 @@ export default function App({ navigation, route }) {
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Minimal Chair 3',
+      title: 'Vintage Chair',
       price: '$25.00',
       dec: 'lorem Ipsum',
       pic: require('../../pic/Vintage_Chair.jpg'),
     },
   ];
-
+  const [listitem, setlistitem] = useState([]);
   const ItemBottom = ({ title, dec, price, pic }) => (
     <TouchableOpacity style={styles.itemBottom} onPress={() =>
       navigation.navigate('DetaiPage', {
@@ -112,8 +111,28 @@ export default function App({ navigation, route }) {
   );
   const renderItemAbove = ({ item }) => (
     <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} />
-
   );
+  const storeData = async (value) => {
+    try {
+      
+      await AsyncStorage.setItem('list', JSON.stringify(DATA))
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('list')
+      return value != null ? setlistitem(JSON.parse(value)) : null
+  
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  useEffect(() => {
+    storeData(DATA)
+    getData()
+  }, [])
   return (
     <View style={{ flex: 1, backgroundColor: '#f5f6fa', }}>
       <SafeAreaView style={styles.container}>
@@ -135,7 +154,7 @@ export default function App({ navigation, route }) {
 
         <Text style={styles.titleItem}>Explore</Text>
         <FlatList
-          data={DATA}
+          data={listitem}
           renderItem={renderItemAbove}
           keyExtractor={item => item.id}
           numColumns={1}
@@ -145,7 +164,7 @@ export default function App({ navigation, route }) {
         />
         <Text style={styles.titleItem}>Best Selling</Text>
         <FlatList
-          data={DATA}
+          data={listitem}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
