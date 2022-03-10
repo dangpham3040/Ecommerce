@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   header: {
+    marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     paddingBottom: 50,
     top: 20,
+  
   },
   container: {
     flex: 1,
@@ -14,12 +16,21 @@ export const styles = StyleSheet.create({
     backgroundColor: '#f5f6fa',
     flexDirection: 'column',
   },
-  title: {
+  _title: {
     color: "#2A2D3F",
     alignContent: 'center',
     justifyContent: 'center',
     fontWeight: 'bold',
     fontSize: 20,
+    fontWeight: "bold",
+  },
+  title: {
+    top: 5,
+    color: "#2A2D3F",
+    alignContent: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: 15,
     fontWeight: "bold",
   },
   searchView: {
@@ -90,7 +101,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '##F5F6FA',
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 10,
   },
 
   bottomCheckout: {
@@ -112,12 +123,12 @@ export const styles = StyleSheet.create({
     bottom: 20,
   },
   add_del: {
-    margin: 5,
+    marginTop: 5,
+    marginBottom: 5,
     borderWidth: 3,
     borderColor: "#dddde8",
     alignContent: "center",
     marginLeft: 10,
-    marginTop: 5,
     backgroundColor: '#fff',
     width: '35%',
     height: '70%',
@@ -132,6 +143,15 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 30,
 
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+
+    elevation: 10,
   }
 });
 

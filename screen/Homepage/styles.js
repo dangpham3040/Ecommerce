@@ -6,13 +6,14 @@ export const styles = StyleSheet.create({
         width: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
-
     },
     container: {
+        marginTop: 30,
+        justifyContent: "center",
         flex: 1,
         flexDirection: 'column',
-        marginLeft: 20,
-        marginRight: 20,
+        marginLeft: 10,
+        marginRight: 10,
         paddingHorizontal: 16,
     },
     title: {
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
         height: 40,
         flexDirection: "row",
         flex: 5,
-        marginTop: 40,
+        marginTop: 60,
         borderWidth: 1,
         borderRadius: 5,
         marginRight: 20,
@@ -38,7 +39,17 @@ export const styles = StyleSheet.create({
         borderTopRightRadius: 10,
         borderBottomLeftRadiusr: 10,
         borderBottomRightRadius: 10,
+        marginBottom: 30,
 
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+
+        elevation: 2,
     },
     icon: {
         flex: 2,
@@ -57,38 +68,55 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-
-
         borderBottomWidth: 1
     },
     searchTextItem: {
-
         fontSize: 14,
-
         marginVertical: 10
     },
     component: {
         marginTop: 24
     },
-
-
     itemBottom: {
-        flex:1,
+        flex: 1,
         justifyContent: 'space-between',
-        borderRadius: 20,
+        borderRadius: 10,
         flexDirection: 'row',
         backgroundColor: '#ffffff',
         padding: 10,
         marginVertical: 8,
-        marginHorizontal: 16,
+        borderRadius:25,
+  
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+
+        elevation: 1,
+
     },
     itemAbove: {
-        flex: 1,
+        backgroundColor:'red',
+        height: 300,
+        width:200,
         borderRadius: 20,
         flexDirection: 'column',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fff',
         padding: 10,
         marginHorizontal: 5,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+
+        elevation: 2,
     },
     goto: {
         justifyContent: 'center',
@@ -102,7 +130,6 @@ export const styles = StyleSheet.create({
         width: "100%",
         alignItems: 'center',
         justifyContent: "flex-start"
-
     },
     price:
     {
@@ -111,23 +138,22 @@ export const styles = StyleSheet.create({
         flex: 2,
     },
     imageBottom: {
-        backgroundColor: "#DDDDE8",
+        justifyContent: "center",
         height: 66,
         width: 66,
         marginRight: 15,
-        borderRadius: 15
+        borderRadius: 20
     },
     imageAbove: {
-        backgroundColor: "#DDDDE8",
-        height: 145, width: 145,
+    
+        height: 180, width: 180,
         borderRadius: 15,
-        marginBottom: 40,
         alignItems: 'flex-end',
         flexWrap: 'wrap-reverse',
         direction: 'inherit'
     },
     headerIcon: {
-        marginTop: 15,
+        marginTop: 30,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -140,9 +166,10 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     titleItem: {
+        marginTop: 50,
         fontWeight: 'bold',
-        fontSize: 20,
-        marginTop: 15,
+        fontSize: 30,
+        marginTop: 20,
         marginBottom: 9,
         color: "#2A2D3F"
     }

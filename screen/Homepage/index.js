@@ -53,6 +53,13 @@ export default function App({ navigation, route }) {
       pic: require('../../pic/Vintage_Chair.jpg'),
     },
   ];
+  const test = [{
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'Minimal Chair ',
+    price: '$25.00',
+    dec: 'lorem Ipsum',
+    pic: require('../../pic/Minimal_Chair.png'),
+  },]
   const [listitem, setlistitem] = useState([]);
   const [seach, setseach] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -103,20 +110,19 @@ export default function App({ navigation, route }) {
       })}>
       <ImageBackground source={pic} style={styles.imageAbove} >
         <View style={{
-          flex: 1,
           top: 5,
-          marginRight: 5,
+          marginRight: 10,
         }} >
           <HeartIcon />
         </View>
 
       </ImageBackground>
-      <View style={{ flex: 2 }}>
+      <View style={{ marginBottom: 15, marginTop: 10 }}>
         <Text style={styles.titleAbove}>{title}</Text>
         <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
       </View>
-      <View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-end' }}>
-        <Text style={{ fontSize: 15, color: '#2A2D3F', flex: 2 }}>{price}</Text>
+      <View style={{ flexDirection: 'row', marginTop: 15 }}>
+        <Text style={{ fontSize: 15, color: '#2A2D3F', flex: 1 }}>{price}</Text>
         <AddIcon style={{ flex: 1, alignItems: "flex-end" }} />
       </View>
     </TouchableOpacity >
@@ -164,36 +170,45 @@ export default function App({ navigation, route }) {
               style={styles.searchInput}
               placeholder="Seach" />
           </View>
-          <ShoppingCartsIcon style={{ marginTop: 45 }} onPress={() => navigation.navigate('CartPage')} />
+          <ShoppingCartsIcon style={{ marginTop: 60 }} onPress={() => navigation.navigate('CartPage')} />
         </View>
         {
           seach === "" ?
-            <View style={{ flex: 2 }}>
-              <Text style={styles.titleItem}>Explore</Text>
-              <FlatList
-                style={{ flex: 1 }}
-                data={listitem}
-                renderItem={renderItemAbove}
-                keyExtractor={item => item.id}
-                numColumns={1}
-                horizontal={true}
-                scrollEnabled
-                showsHorizontalScrollIndicator={false}
-              />
-              <Text style={styles.titleItem}>Best Selling</Text>
-              <FlatList
-                style={{ flex: 1 }}
-                data={listitem}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-              />
+            <View style={{ flex: 2, }}>
+              <View style={{ flex: 2, }}>
+                <Text style={styles.titleItem}>Explore</Text>
+                <FlatList
+                  style={{ flex: 1 }}
+                  data={listitem}
+                  renderItem={renderItemAbove}
+                  keyExtractor={item => item.id}
+                  numColumns={1}
+                  horizontal={true}
+                  scrollEnabled
+                  showsHorizontalScrollIndicator={false}
+                />
+              </View>
+              <View style={{
+                flex: 1.5,
+                width: '100%',
+                height: '20%',
+                justifyContent: 'space-between'
+              }}>
+                <Text style={styles.titleItem}>Best Selling</Text>
+                <FlatList
+               
+                  data={test}
+                  renderItem={renderItem}
+                  keyExtractor={item => item.id}
+                />
+              </View>
             </View>
             :
-            <View style={{ marginTop: 20 }}>
+            <View style={{ flex: 2, marginTop: 20 }}>
               <Text style={styles.title}>Seach result</Text>
               <FlatList
                 numColumns={1}
-                style={{ marginTop: 20 }}
+                style={{ marginTop: 20, flex: 1 }}
                 data={filteredDataSource}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}

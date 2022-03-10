@@ -1,14 +1,26 @@
-import React from "react";
-import Circle from "react-native-svg";
-import Svg, { Path, Rect } from 'react-native-svg'
+import * as React from "react"
+import Svg, { Path } from "react-native-svg"
 
-export default function UserIcon({ color }) {
-    return (
-<Svg width="39" height="36" viewBox="0 0 39 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-<Path d="M19.5 35.6C30.2696 35.6 39 27.6307 39 17.8C39 7.96932 30.2696 0 19.5 0C8.73044 0 0 7.96932 0 17.8C0 27.6307 8.73044 35.6 19.5 35.6Z" fill="white"/>
-<Path d="M26.1515 13.3123C24.3337 11.653 21.3591 11.653 19.5413 13.3123C17.7235 11.653 14.749 11.653 12.9312 13.3123C11.1134 14.9716 11.1134 17.6869 12.9312 19.3462L19.5413 25.3801L26.1515 19.3462C27.9693 17.6869 27.9693 14.9716 26.1515 13.3123Z" fill="#F26B6B"/>
-</Svg>
-
-        
-    )
+function SvgComponent(props) {
+  return (
+    <Svg
+      width={49}
+      height={46}
+      viewBox="0 0 39 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M19.5 35.6c10.77 0 19.5-7.97 19.5-17.8C39 7.97 30.27 0 19.5 0S0 7.97 0 17.8c0 9.83 8.73 17.8 19.5 17.8z"
+        fill="#fff"
+      />
+      <Path
+        d="M26.151 13.312c-1.817-1.659-4.792-1.659-6.61 0-1.817-1.659-4.792-1.659-6.61 0-1.818 1.66-1.818 4.375 0 6.034l6.61 6.034 6.61-6.034c1.818-1.66 1.818-4.374 0-6.034z"
+        fill="#F26B6B"
+      />
+    </Svg>
+  )
 }
+
+export default SvgComponent

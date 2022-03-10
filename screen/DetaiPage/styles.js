@@ -1,14 +1,30 @@
 import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   header: {
+    marginTop: 20,
+    backgroundColor: '#dddde8',
     flexDirection: 'row',
     justifyContent: 'space-between',
     flex: 1,
-    paddingHorizontal: 20,
-    paddingBottom: 50,
+    paddingBottom: 45,
     alignItems: 'flex-start',
     flexWrap: 'wrap',
     direction: 'inherit',
+    height: '100%',
+    width: '100%',
+  },
+  headericon: {
+    marginTop: 20,
+    backgroundColor: '#f5f6fa',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+    paddingBottom: 45,
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+    direction: 'inherit',
+    height: '100%',
+    width: '100%',
     
   },
   container: {
@@ -18,33 +34,21 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   titleProduct: {
-    color: '#fff',
+    flex: 1,
     alignContent: 'center',
     justifyContent: 'center',
-    fontSize: 25
-
+    fontSize: 25,
+    textAlign: "center",
   },
   title: {
-    flex:1,
+    marginTop: 15,
     color: '#2A2D3F',
     alignContent: 'center',
     justifyContent: 'center',
     fontWeight: 'bold',
-
-},
-  searchView: {
-    backgroundColor: '#ffffff',
-    borderColor: '#ffffff',
-    borderRadius: 20,
-    height: 40,
-    flexDirection: "row",
-    flex: 5,
-    marginTop: 40,
-    borderWidth: 1,
-    borderRadius: 5,
-    marginRight: 20,
-    justifyContent: 'center'
+    fontSize: 20, fontWeight: 'bold', lineHeight: 20,
   },
+
   icon: {
     flex: 2,
     alignItems: "center",
@@ -62,18 +66,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-
-
     borderBottomWidth: 1
-  },
-  searchTextItem: {
-
-    fontSize: 14,
-
-    marginVertical: 10
-  },
-  component: {
-    marginTop: 24
   },
 
 
@@ -87,7 +80,6 @@ export const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   itemAbove: {
-
     borderRadius: 20,
     flexDirection: 'column',
     backgroundColor: '#ffffff',
@@ -99,15 +91,7 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
     position: 'absolute'
   },
-  searchIcon: {
-    marginLeft: 15,
-    marginRight: 15,
-    height: "100%",
-    width: "100%",
-    alignItems: 'center',
-    justifyContent: "flex-start"
 
-  },
   price:
   {
     color: "#2A2D3F", fontSize: 7, flex: 2
@@ -124,30 +108,55 @@ export const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   AddCartIcon: {
-    flex:1,
+    flex: 1,
     borderRadius: 10,
     backgroundColor: '#2A2D3F',
     borderTopLeftRadius: 200,
-    borderBottomRightRadius: 200,
+
     alignContent: 'center',
     alignItems: "center",
     position: 'absolute',
     bottom: 0,
     right: 0,
-    padding:20,
-    width: "50%",
+    padding: 20,
+    width: "55%",
     height: "18%",
   },
-  HeartLike:{
+  HeartLike: {
     flexDirection: 'column',
     alignContent: 'flex-end',
-    flex: 2,
     justifyContent: "flex-end",
     alignItems: "flex-end",
     flex: 1,
     position: 'absolute',
     bottom: 0,
-    right: 15,
+    right: 20,
+
+    borderRadius: 50,
+    backgroundColor: 'transparent',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 2,
+  },
+  dot: {
+    width: 7,
+    height: 7,
+    borderRadius: 15,
+    marginHorizontal: 10,
+    padding: 0,
+    margin: 0,
+  },
+  describe: {
+    width: 350, fontWeight: '400', color: "#B8B8CD", top: 10, right: 20, fontFamily: 'PoppinsVN-400', fontSize: 15, left: 5
+    ,
+  },
+  price: {
+    flex: 1, justifyContent: 'center', color: "#F26B6B", fontSize: 25, fontWeight: 'bold', lineHeight: 25, fontFamily: 'Poppins'
   }
 
 });

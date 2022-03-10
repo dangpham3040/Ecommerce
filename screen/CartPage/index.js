@@ -77,17 +77,16 @@ export default function App({ navigation }) {
       setnum(num - 1);
     }
   }
-  const Item = ({ title, dec, price, pic }) => (
+  const Item = ({ title, price, pic }) => (
     <View style={styles.item}>
-      <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
+      <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', marginBottom: 15}}>
         {
           checked ? <CheckedIcon style={{ marginRight: 15 }} onPress={handleCheck} /> : <UnCheck style={{ marginRight: 15 }} onPress={handleCheck} />
         }
-        <Image source={pic} style={{ flex: 1, backgroundColor: "#DDDDE8", height: 70, width: 70, marginRight: 15 }} />
-        <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, alignContent: 'center' }}>
+        <Image source={pic} style={{ flex: 1, height: 70, width: 70, marginRight: 15,borderRadius:20 }} />
+        <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
-          <View style={{ flexDirection: 'row', marginLeft: 15, alignContent: 'space-between' }}>
+          <View style={{  flexDirection: 'row',  alignContent: 'space-between',top:15 }}>
             <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>{price}</Text>
             <View style={styles.add_del}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -141,21 +140,20 @@ export default function App({ navigation }) {
     getData()
     storeData_choose()
     getData_choose()
-
   }, [])
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
       <View style={{
         flex: 2,
-        marginLeft: 10,
-        marginRight: 10,
+     
+   
       }}>
         <View>
         </View>
         <View style={styles.header}>
           <GoBackIcon onPress={() => navigation.navigate('HomePage')} />
-          <Text style={styles.title}>Cart</Text>
+          <Text style={styles._title}>Cart</Text>
           <ShoppingCartsIcon />
         </View>
         <FlatList
@@ -171,22 +169,23 @@ export default function App({ navigation }) {
           <Text style={{ color: "#2A2D3F", flex: 4 }}>Selected Items</Text>
           <Text style={{
             color: "#F26B6B", flex: 1,
+            alignSelf: 'flex-end',
           }}>$235.00</Text>
         </View>
         <View style={styles.bottomCheckout}>
           <Text style={{ color: "#2A2D3F", flex: 4 }}>Shipping Fee</Text>
           <Text style={{
             color: "#F26B6B", flex: 1,
-          }}>$30.00</Text>
+          }}>$30.000</Text>
         </View>
 
         <View style={styles.line} />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', left: 40, bottom: 150 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', left: 30, bottom: 150}}>
           <Text style={{ color: "#2A2D3F", flex: 3.5, fontWeight: 'bold', fontSize: 20 }}>Subtotal</Text>
           <Text style={{
-            color: "#F26B6B", flex: 1.5,
+            color: "#F26B6B", flex: 1,
             fontWeight: '600',
-            fontSize: 20
+            fontSize: 20,
           }}>$265.00</Text>
 
         </View>
