@@ -26,8 +26,10 @@ import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import UserIcon from '../../icons/UserIcon/UserIcon';
 import AddIcon from '../../icons/AddIcon/AddIcon';
 import HeartIcon from '../../icons/HeartIcon/HeartIcon'
+import LayoutBottomIcon from '../../icons/LayoutBottomIcon/LayoutBottomIcon'
 import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function App({ navigation, route }) {
   const DATA = [
@@ -64,7 +66,6 @@ export default function App({ navigation, route }) {
   const [seach, setseach] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
 
-
   const handleSearch = (text) => {
     if (text) {
       const newData = listitem.filter(function (item) {
@@ -82,7 +83,7 @@ export default function App({ navigation, route }) {
     }
   };
   const ItemBottom = ({ title, dec, price, pic }) => (
-    <TouchableOpacity style={styles.itemBottom} onPress={() =>
+    <TouchableOpacity style={[styles.itemBottom, styles.ShadowItem]} onPress={() =>
       navigation.navigate('DetaiPage', {
         title: title,
         price: price,
@@ -90,42 +91,48 @@ export default function App({ navigation, route }) {
         pic: pic,
       })} >
       <Image source={pic} style={styles.imageBottom} />
-      <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center', flex: 2 }}>
+      <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center', flex: 2, marginRight: 5}}>
         <Text style={styles.title}>{title}</Text>
         <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row' ,justifyContent: 'space-between',}}>
           <Text style={styles.price}>{price}</Text>
-          <GotoIcon style={{ flex: 1, alignItems: "flex-end" }} onPress={() => navigation.navigate('DetaiPage')} />
+          <GotoIcon style={{
+            flex: 1, alignItems: "flex-end",
+            bottom: 8,
+          }} onPress={() => navigation.navigate('DetaiPage')} />
         </View>
       </View>
     </TouchableOpacity>
   );
   const ItemAbove = ({ title, dec, price, pic }) => (
-    <TouchableOpacity style={styles.itemAbove} onPress={() =>
-      navigation.navigate('DetaiPage', {
-        title: title,
-        price: price,
-        dec: dec,
-        pic: pic,
-      })}>
-      <ImageBackground source={pic} style={styles.imageAbove} >
-        <View style={{
-          top: 5,
-          marginRight: 10,
-        }} >
-          <HeartIcon />
-        </View>
+    <View style={{ overflow: 'hidden', }}>
+      <TouchableOpacity style={[styles.itemAbove, styles.ShadowItem]} onPress={() =>
+        navigation.navigate('DetaiPage', {
+          title: title,
+          price: price,
+          dec: dec,
+          pic: pic,
+        })}>
+        <ImageBackground source={pic} style={styles.imageAbove} >
+          <View style={{
+            flex: 1,
+            top: 5,
+            right: 5,
+          }} >
+            <HeartIcon />
+          </View>
 
-      </ImageBackground>
-      <View style={{ marginBottom: 15, marginTop: 10 }}>
-        <Text style={styles.titleAbove}>{title}</Text>
-        <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
-      </View>
-      <View style={{ flexDirection: 'row', marginTop: 15 }}>
-        <Text style={{ fontSize: 15, color: '#2A2D3F', flex: 1 }}>{price}</Text>
-        <AddIcon style={{ flex: 1, alignItems: "flex-end" }} />
-      </View>
-    </TouchableOpacity >
+        </ImageBackground>
+        <View style={{ marginBottom: 20, marginTop: 20, alignSelf: 'flex-start' }}>
+          <Text style={styles.titleAbove}>{title}</Text>
+          <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ fontSize: 15, color: '#2A2D3F', flex: 1 }}>{price}</Text>
+          <AddIcon style={{ flex: 1, alignItems: "flex-end" }} />
+        </View>
+      </TouchableOpacity >
+    </View>
   );
 
   const renderItem = ({ item }) => (
@@ -152,18 +159,18 @@ export default function App({ navigation, route }) {
   useEffect(() => {
     storeData()
     getData()
+
   }, [])
   return (
-    <View style={{ flex: 1, backgroundColor: '#f5f6fa', }}>
+    <View style={{ height:'100%',width:'100%', backgroundColor: '#f5f6fa', }}>
       <SafeAreaView style={styles.container}>
         <StatusBar hidden />
-        <View style={styles.headerIcon}>
+        <View style={[styles.headerIcon, styles.margin_layout]}>
           <MenuIcon style={{ flex: 1 }} />
           <UserIcon style={{ flex: 1 }} />
         </View>
-
-        <View style={{ flexDirection: "row" }}>
-          <View style={styles.searchView}>
+        <View style={[{ flexDirection: "row" }, styles.margin_layout]}>
+          <View style={[styles.searchView,styles.ShadowItem]}>
             <SeachIcon style={{ margin: 10 }} />
             <TextInput
               onChangeText={(text) => handleSearch(text)}
@@ -174,11 +181,10 @@ export default function App({ navigation, route }) {
         </View>
         {
           seach === "" ?
-            <View style={{ flex: 2, }}>
-              <View style={{ flex: 2, }}>
-                <Text style={styles.titleItem}>Explore</Text>
+            <View style={{ flex: 1 }}>
+              <View style={[{ flex: 2.2}]}>
+                <Text style={[styles.titleItem, styles.margin_layout]}>Explore</Text>
                 <FlatList
-                  style={{ flex: 1 }}
                   data={listitem}
                   renderItem={renderItemAbove}
                   keyExtractor={item => item.id}
@@ -188,15 +194,9 @@ export default function App({ navigation, route }) {
                   showsHorizontalScrollIndicator={false}
                 />
               </View>
-              <View style={{
-                flex: 1.5,
-                width: '100%',
-                height: '20%',
-                justifyContent: 'space-between'
-              }}>
-                <Text style={styles.titleItem}>Best Selling</Text>
+              <View style={[styles.list_bottom]}>
+                <Text style={[styles.titleItem]}>Best Selling</Text>
                 <FlatList
-               
                   data={test}
                   renderItem={renderItem}
                   keyExtractor={item => item.id}
@@ -204,8 +204,8 @@ export default function App({ navigation, route }) {
               </View>
             </View>
             :
-            <View style={{ flex: 2, marginTop: 20 }}>
-              <Text style={styles.title}>Seach result</Text>
+            <View style={[{ flex: 2, marginTop: 20 },styles.margin_layout]}>
+              <Text style={styles.titleItem}>Seach result</Text>
               <FlatList
                 numColumns={1}
                 style={{ marginTop: 20, flex: 1 }}

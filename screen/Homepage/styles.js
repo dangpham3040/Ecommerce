@@ -12,10 +12,9 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         flex: 1,
         flexDirection: 'column',
-        marginLeft: 10,
-        marginRight: 10,
-        paddingHorizontal: 16,
+
     },
+
     title: {
         color: '#2A2D3F',
         alignContent: 'center',
@@ -26,14 +25,13 @@ export const styles = StyleSheet.create({
     searchView: {
         backgroundColor: '#ffffff',
         borderColor: '#ffffff',
-        borderRadius: 20,
         height: 40,
         flexDirection: "row",
         flex: 5,
         marginTop: 60,
         borderWidth: 1,
-        borderRadius: 5,
-        marginRight: 20,
+        borderRadius: 10,
+        marginRight: 10,
         justifyContent: 'center',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -41,15 +39,7 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 10,
         marginBottom: 30,
 
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-
-        elevation: 2,
+     
     },
     icon: {
         flex: 2,
@@ -82,41 +72,22 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderRadius: 10,
         flexDirection: 'row',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fff',
         padding: 10,
-        marginVertical: 8,
-        borderRadius:25,
-  
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-
-        elevation: 1,
-
+        marginVertical: 10,
     },
     itemAbove: {
-        backgroundColor:'red',
         height: 300,
-        width:200,
-        borderRadius: 20,
+        width: 200,
+        borderRadius: 10,
         flexDirection: 'column',
         backgroundColor: '#fff',
         padding: 10,
         marginHorizontal: 5,
-
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-
-        elevation: 2,
+        marginLeft: 20,
+        alignContent: "center",
+        alignItems: 'center',
+        marginVertical: 10,
     },
     goto: {
         justifyContent: 'center',
@@ -138,26 +109,29 @@ export const styles = StyleSheet.create({
         flex: 2,
     },
     imageBottom: {
+
         justifyContent: "center",
         height: 66,
         width: 66,
         marginRight: 15,
-        borderRadius: 20
+        borderRadius: 10
     },
     imageAbove: {
-    
+     
+        marginLeft: 20,
+        marginRight: 20,
         height: 180, width: 180,
-        borderRadius: 15,
+        borderRadius: 10,
         alignItems: 'flex-end',
-        flexWrap: 'wrap-reverse',
-        direction: 'inherit'
     },
     headerIcon: {
+
         marginTop: 30,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     titleAbove: {
+        alignItems: 'center',
         color: '#2A2D3F',
         alignContent: 'center',
         justifyContent: 'center',
@@ -170,7 +144,33 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 30,
         marginTop: 20,
-        marginBottom: 9,
-        color: "#2A2D3F"
+        marginBottom: 10,
+        color: "#2A2D3F",
+      
+    },
+    list_bottom:
+    {
+        marginTop:20,
+        flex: 1.5,
+        width: '85%',
+        height: '15%',
+        left: 25,
+        right: 25,
+        top:20,
+    },
+
+    margin_layout: {
+        marginLeft: 25,
+        marginRight: 25,
+    },
+    ShadowItem: {
+        shadowColor: "#d8dde4",
+        shadowOffset: {
+            width: 0,
+            height: 20,
+        },
+        shadowRadius: 0.36,
+        shadowOpacity: 10,
+        elevation: 5,
     }
 });
