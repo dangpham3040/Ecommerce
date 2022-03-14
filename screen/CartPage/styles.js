@@ -98,14 +98,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 20,
     flexDirection: 'row',
-    backgroundColor: '##F5F6FA',
+    backgroundColor: '#F5F6FA',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 10,
   },
 
   bottomCheckout: {
-    flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, paddingTop: 10,
+    flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, paddingTop: 10
   },
   line: {
     borderBottomColor: '#e1e1ea',
@@ -141,18 +141,21 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 45,
     borderTopRightRadius: 45,
     paddingHorizontal: 30,
-    paddingVertical: 30,
+    paddingVertical: 10,
+    overflow :"hidden",
+  },
+  Shadow: {
+    shadowColor: "#e2e5eb",
 
-    shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 10,
     },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-
-    elevation: 10,
-  }
+    shadowOpacity: 0.51,
+    shadowRadius: 13.16,
+    
+    elevation: 20,
+}
 });
 
 

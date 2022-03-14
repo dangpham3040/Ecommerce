@@ -99,7 +99,6 @@ export default function App({ navigation, route }) {
             cing elit, sed diam nonummy nibh euismod tincid{"\n"}
             unt ut{"\n"}
             laoreet dolore magna.</Text>
-
         </View>
         <View style={styles.AddCartIcon} >
           <Text style={{ color: '#fff' ,fontSize: 20}}>+  Add to Cart </Text>

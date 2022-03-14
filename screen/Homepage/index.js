@@ -68,6 +68,7 @@ export default function App({ navigation, route }) {
 
   const handleSearch = (text) => {
     if (text) {
+
       const newData = listitem.filter(function (item) {
         const itemData = item.title
           ? item.title.toUpperCase()
@@ -181,8 +182,8 @@ export default function App({ navigation, route }) {
         </View>
         {
           seach === "" ?
-            <View style={{ flex: 1 }}>
-              <View style={[{ flex: 2.2}]}>
+            <View style={{ flex: 2 }}>
+              <View style={[{ flex: 2.5}]}>
                 <Text style={[styles.titleItem, styles.margin_layout]}>Explore</Text>
                 <FlatList
                   data={listitem}
@@ -212,6 +213,7 @@ export default function App({ navigation, route }) {
                 data={filteredDataSource}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
+              
               />
             </View>
         }

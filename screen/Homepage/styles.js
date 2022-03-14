@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 10,
         marginBottom: 30,
 
-     
+
     },
     icon: {
         flex: 2,
@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderRadius: 10,
         flexDirection: 'row',
-        backgroundColor: '#fff',
+        backgroundColor: '#FFFFFF',
         padding: 10,
         marginVertical: 10,
     },
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
         width: 200,
         borderRadius: 10,
         flexDirection: 'column',
-        backgroundColor: '#fff',
+        backgroundColor: '#FFFFFF',
         padding: 10,
         marginHorizontal: 5,
         marginLeft: 20,
@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
         borderRadius: 10
     },
     imageAbove: {
-     
+
         marginLeft: 20,
         marginRight: 20,
         height: 180, width: 180,
@@ -146,17 +146,17 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 10,
         color: "#2A2D3F",
-      
+
     },
     list_bottom:
     {
-        marginTop:20,
-        flex: 1.5,
+     
+        flex: 1.75,
         width: '85%',
         height: '15%',
         left: 25,
         right: 25,
-        top:20,
+        top: 20,
     },
 
     margin_layout: {
@@ -164,13 +164,14 @@ export const styles = StyleSheet.create({
         marginRight: 25,
     },
     ShadowItem: {
-        shadowColor: "#d8dde4",
+        shadowColor:"#e3e5ea",
         shadowOffset: {
             width: 0,
-            height: 20,
+            height: 10,
         },
-        shadowRadius: 0.36,
-        shadowOpacity: 10,
-        elevation: 5,
+        shadowOpacity: 0.51,
+        shadowRadius: 13.16,
+        
+        elevation: 20,
     }
 });
