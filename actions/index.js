@@ -1,9 +1,11 @@
-export const add = () => {
+
+
+export const addItem = () => {
     return {
         type: "ADD"
     };
 }
-export const del = () => {
+export const removeItem = () => {
     return {
         type: "DEL"
     };

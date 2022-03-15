@@ -68,7 +68,6 @@ export default function App({ navigation, route }) {
 
   const handleSearch = (text) => {
     if (text) {
-
       const newData = listitem.filter(function (item) {
         const itemData = item.title
           ? item.title.toUpperCase()
@@ -92,10 +91,10 @@ export default function App({ navigation, route }) {
         pic: pic,
       })} >
       <Image source={pic} style={styles.imageBottom} />
-      <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center', flex: 2, marginRight: 5}}>
+      <View style={{ flexDirection: 'column', marginLeft: 15, alignContent: 'center', flex: 2, marginRight: 5 }}>
         <Text style={styles.title}>{title}</Text>
         <Text style={{ color: "#B8B8CD" }}>{dec}</Text>
-        <View style={{ flexDirection: 'row' ,justifyContent: 'space-between',}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
           <Text style={styles.price}>{price}</Text>
           <GotoIcon style={{
             flex: 1, alignItems: "flex-end",
@@ -105,7 +104,7 @@ export default function App({ navigation, route }) {
       </View>
     </TouchableOpacity>
   );
-  const ItemAbove = ({ title, dec, price, pic }) => (
+  const ItemAbove = ({ title, dec, price, pic, item }) => (
     <View style={{ overflow: 'hidden', }}>
       <TouchableOpacity style={[styles.itemAbove, styles.ShadowItem]} onPress={() =>
         navigation.navigate('DetaiPage', {
@@ -113,6 +112,7 @@ export default function App({ navigation, route }) {
           price: price,
           dec: dec,
           pic: pic,
+          item: item,
         })}>
         <ImageBackground source={pic} style={styles.imageAbove} >
           <View style={{
@@ -137,7 +137,7 @@ export default function App({ navigation, route }) {
   );
 
   const renderItem = ({ item }) => (
-    <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} />
+    <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} item={item} />
   );
   const renderItemAbove = ({ item }) => (
     <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} />
@@ -163,7 +163,7 @@ export default function App({ navigation, route }) {
 
   }, [])
   return (
-    <View style={{ height:'100%',width:'100%', backgroundColor: '#f5f6fa', }}>
+    <View style={{ height: '100%', width: '100%', backgroundColor: '#f5f6fa', }}>
       <SafeAreaView style={styles.container}>
         <StatusBar hidden />
         <View style={[styles.headerIcon, styles.margin_layout]}>
@@ -171,7 +171,7 @@ export default function App({ navigation, route }) {
           <UserIcon style={{ flex: 1 }} />
         </View>
         <View style={[{ flexDirection: "row" }, styles.margin_layout]}>
-          <View style={[styles.searchView,styles.ShadowItem]}>
+          <View style={[styles.searchView, styles.ShadowItem]}>
             <SeachIcon style={{ margin: 10 }} />
             <TextInput
               onChangeText={(text) => handleSearch(text)}
@@ -183,7 +183,7 @@ export default function App({ navigation, route }) {
         {
           seach === "" ?
             <View style={{ flex: 2 }}>
-              <View style={[{ flex: 2.5}]}>
+              <View style={[{ flex: 2.5 }]}>
                 <Text style={[styles.titleItem, styles.margin_layout]}>Explore</Text>
                 <FlatList
                   data={listitem}
@@ -205,7 +205,7 @@ export default function App({ navigation, route }) {
               </View>
             </View>
             :
-            <View style={[{ flex: 2, marginTop: 20 },styles.margin_layout]}>
+            <View style={[{ flex: 2, marginTop: 20 }, styles.margin_layout]}>
               <Text style={styles.titleItem}>Seach result</Text>
               <FlatList
                 numColumns={1}
@@ -213,7 +213,7 @@ export default function App({ navigation, route }) {
                 data={filteredDataSource}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
-              
+
               />
             </View>
         }

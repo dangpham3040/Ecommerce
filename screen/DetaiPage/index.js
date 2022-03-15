@@ -24,6 +24,11 @@ import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
 import { SliderBox } from "react-native-image-slider-box"
 import LinearGradient from 'react-native-linear-gradient';
 
+import { useSelector, useDispatch } from 'react-redux';
+import allReducter from '../../redux/counter';
+import ADD from '../../actions';
+import { createStore } from 'redux';
+const store = createStore(allReducter);
 const images = [
   require('../../pic/Minimal_Chair.png'),
   require('../../pic/Elegant_White_Chair.jpg'),
@@ -32,7 +37,7 @@ const images = [
 ];
 
 export default function App({ navigation, route }) {
-
+  const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.container}>
       <View style={{
@@ -101,7 +106,7 @@ export default function App({ navigation, route }) {
             laoreet dolore magna.</Text>
         </View>
         <View style={styles.AddCartIcon} >
-          <Text style={{ color: '#fff' ,fontSize: 20}}>+  Add to Cart </Text>
+          <Text style={{ color: '#fff' ,fontSize: 20}} onPress={()=>store.dispatch({type:"ADD",payload: route.params.item})} > +  Add to Cart </Text>
         </View>
       </View>
     </SafeAreaView>

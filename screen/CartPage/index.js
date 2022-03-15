@@ -24,12 +24,8 @@ import { styles } from './styles';
 import UnCheck from '../../icons/UnCheck/UnCheck';
 import CheckedIcon from '../../icons/CheckedIcon/CheckedIcon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createStore } from 'redux';
-import { useSelector, useDispatch } from 'react-redux';
-import allReducter from '../../redux';
-import ADD from '../../actions';
-let store = createStore(allReducter, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-// let dispatch = useDispatch();
+
+
 export default function App({ navigation }) {
   const DATA = [
     {
@@ -62,8 +58,8 @@ export default function App({ navigation }) {
   ];
   const [listitem, setlistitem] = useState([]);
   const [total, settotal] = useState(0);
-  const [ship,setShip]= useState(30);
-  const [totalMoney,settotalMoney]=useState(ship);
+  const [ship, setShip] = useState(30);
+  const [totalMoney, settotalMoney] = useState(ship);
 
   const handleCheck = (i) => {
     if (listitem[i].check === "true") {
@@ -133,7 +129,7 @@ export default function App({ navigation }) {
       }
     }
     settotal(total);
-    settotalMoney(total+ship);
+    settotalMoney(total + ship);
   }
   const storeData = async (data) => {
     try {
@@ -155,6 +151,7 @@ export default function App({ navigation }) {
     storeData(DATA)
     getData()
   }, [])
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
@@ -181,6 +178,7 @@ export default function App({ navigation }) {
           <Text style={{
             color: "#F26B6B", flex: 1,
             alignSelf: 'flex-end',
+     
           }}>${total.toFixed(2)}</Text>
         </View>
         <View style={styles.bottomCheckout}>

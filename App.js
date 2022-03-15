@@ -16,8 +16,10 @@ import DetaiPage from './screen/DetaiPage';
 import { useSelector, useDispatch } from 'react-redux';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import allReducter from './redux';
+
+import allReducter from './redux/counter';
 const store = createStore(allReducter, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+// const store = createStore(allReducter);
 
 const Stack = createNativeStackNavigator();
 export default function App() {
