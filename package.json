@@ -15,6 +15,7 @@
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "@reduxjs/toolkit": "^1.8.0",
     "flat-carousel": "^0.0.1",
     "react": "17.0.2",
     "react-native": "0.67.3",
@@ -31,7 +32,9 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^12.3.0",
     "react-navigation": "^4.4.4",
-    "react-simple-image-slider": "^2.4.0"
+    "react-redux": "^7.2.6",
+    "react-simple-image-slider": "^2.4.0",
+    "redux": "^4.1.2"
   },
   "devDependencies": {
     "@babel/core": "7.17.5",
