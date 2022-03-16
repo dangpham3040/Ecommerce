@@ -23,11 +23,12 @@ import RatingStar from '../../icons/RatingStar/RatingStar';
 import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
 import { SliderBox } from "react-native-image-slider-box"
 import LinearGradient from 'react-native-linear-gradient';
-
 import { useSelector, useDispatch } from 'react-redux';
-import allReducter from '../../redux/counter';
-import ADD from '../../actions';
+import allReducter from '../../redux';
+import *as ACTION from '../../actions';
 import { createStore } from 'redux';
+import *as counter from '../../redux/counter';
+
 const store = createStore(allReducter);
 const images = [
   require('../../pic/Minimal_Chair.png'),
@@ -35,6 +36,7 @@ const images = [
   require('../../pic/Vintage_Chair.jpg'),
   require('../../pic/Vintage_Chair.jpg'),
 ];
+
 
 export default function App({ navigation, route }) {
   const dispatch = useDispatch();
@@ -51,7 +53,7 @@ export default function App({ navigation, route }) {
           <View style={{ flexDirection: 'row', justifyContent: "space-between", paddingHorizontal: 25, backgroundColor: '#fff' }}>
             <GoBackIcon onPress={() => navigation.navigate('HomePage')} />
             <Text style={styles.titleProduct}>Product</Text>
-            <ShoppingCartsIcon onPress={() => navigation.navigate('CartPage')}/>
+            <ShoppingCartsIcon onPress={() => navigation.navigate('CartPage')} />
           </View>
           <SliderBox
             style={{
@@ -73,7 +75,7 @@ export default function App({ navigation, route }) {
             position: "absolute",
             bottom: 0,
             opacity: 0.49,
-          }} colors={[ 'rgba(255, 255, 255, 1)', 'rgba(0, 0, 0, 1)']} deg={180} />
+          }} colors={['rgba(255, 255, 255, 1)', 'rgba(0, 0, 0, 1)']} deg={180} />
           {/* <ImageBackground style={styles.header} source={require('../../pic/Minimal_Chair.png')} >
             <View style={{ flexDirection: 'row', justifyContent: "space-between" ,paddingHorizontal: 25,}}>
               <GoBackIcon style={{ flex: 1 }} onPress={() => navigation.navigate('HomePage')} />
@@ -106,9 +108,17 @@ export default function App({ navigation, route }) {
             laoreet dolore magna.</Text>
         </View>
         <View style={styles.AddCartIcon} >
-          <Text style={{ color: '#fff' ,fontSize: 20}} onPress={()=>store.dispatch({type:"ADD",payload: route.params.item})} > +  Add to Cart </Text>
+          <Text style={{ color: '#fff', fontSize: 20 }} onPress={() => store.dispatch({
+            type: 'ADD_CART',
+            id: route.params.id,
+            title: route.params.title,
+            price: route.params.price,
+            dec: route.params.dec,
+            pic: route.params.pic
+          }
+          )} > +  Add to Cart </Text>
         </View>
       </View>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }

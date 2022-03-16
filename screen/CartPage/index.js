@@ -24,7 +24,13 @@ import { styles } from './styles';
 import UnCheck from '../../icons/UnCheck/UnCheck';
 import CheckedIcon from '../../icons/CheckedIcon/CheckedIcon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector, useDispatch } from 'react-redux';
+import allReducter from '../../redux';
+import { createStore } from 'redux';
+import *as ACTION from '../../actions';
+import *as counter from'../../redux/counter';
 
+const store = createStore(allReducter);
 
 export default function App({ navigation }) {
   const DATA = [
@@ -35,7 +41,7 @@ export default function App({ navigation }) {
       dec: 'lorem Ipsum',
       pic: require('../../pic/Minimal_Chair.png'),
       check: "false",
-      amount: 1,
+      quantity: 1,
     },
     {
       id: 1,
@@ -44,7 +50,7 @@ export default function App({ navigation }) {
       dec: 'lorem Ipsum',
       pic: require('../../pic/Elegant_White_Chair.jpg'),
       check: "false",
-      amount: 1,
+      quantity: 1,
     },
     {
       id: 2,
@@ -53,9 +59,14 @@ export default function App({ navigation }) {
       dec: 'lorem Ipsum',
       pic: require('../../pic/Vintage_Chair.jpg'),
       check: "false",
-      amount: 1,
+      quantity: 1,
     },
   ];
+  const Temp = counter. Carts;
+  console.log("so luong : "+Temp.length);
+  console.log("\n\n**************************");
+
+
   const [listitem, setlistitem] = useState([]);
   const [total, settotal] = useState(0);
   const [ship, setShip] = useState(30);
@@ -96,21 +107,21 @@ export default function App({ navigation }) {
       }
     }
   }
-  const Item = ({ title, price, pic, check, amount, id }) => (
+  const Item = ({ title, price, pic, check, quantity, id }) => (
     <View style={styles.item}>
       <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
         {
           check === "true" ? <CheckedIcon style={{ marginRight: 15 }} onPress={() => handleCheck(id)} /> : <UnCheck style={{ marginRight: 15 }} onPress={() => handleCheck(id)} />
         }
-        <Image source={pic} style={{ flex: 1, height: 70, width: 70, marginRight: 15, borderRadius: 20 }} />
+        <Image source={{uri: pic}} style={{ flex: 1, height: 70, width: 70, marginRight: 15, borderRadius: 20 }} />
         <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
           <Text style={styles.title}>{title}</Text>
           <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
-            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
+            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price}</Text>
             <View style={styles.add_del}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text onPress={(() => handladd(id))}>+</Text>
-                <Text >{amount}</Text>
+                <Text >{quantity}</Text>
                 <Text onPress={() => handldel(id)}>-</Text>
               </View>
             </View>
@@ -119,7 +130,7 @@ export default function App({ navigation }) {
       </View>
     </View >);
   const renderItem = ({ item }) => (
-    <Item title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} amount={item.amount} />
+    <Item title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} quantity={item.quantity} />
   );
   const handltotal = () => {
     var total = 0;
@@ -130,6 +141,7 @@ export default function App({ navigation }) {
     }
     settotal(total);
     settotalMoney(total + ship);
+
   }
   const storeData = async (data) => {
     try {
@@ -142,13 +154,15 @@ export default function App({ navigation }) {
     try {
       const value = await AsyncStorage.getItem('list')
       return value != null ? setlistitem(JSON.parse(value)) : null
-
     } catch (e) {
       console.log(e);
     }
   }
+  // const dispatch = useDispatch();
+  // var temp = store.dispatch({type:'GET_ALL_PRODUCT',payload:[DATA]});
+
   useEffect(() => {
-    storeData(DATA)
+    storeData(Temp)
     getData()
   }, [])
 
@@ -159,7 +173,7 @@ export default function App({ navigation }) {
         <View>
         </View>
         <View style={styles.header}>
-          <GoBackIcon onPress={() => navigation.navigate('HomePage')} />
+          <GoBackIcon onPress={() => navigation.goBack() }/>
           <Text style={styles._title}>Cart</Text>
           <ShoppingCartsIcon />
         </View>
@@ -178,7 +192,7 @@ export default function App({ navigation }) {
           <Text style={{
             color: "#F26B6B", flex: 1,
             alignSelf: 'flex-end',
-     
+
           }}>${total.toFixed(2)}</Text>
         </View>
         <View style={styles.bottomCheckout}>
