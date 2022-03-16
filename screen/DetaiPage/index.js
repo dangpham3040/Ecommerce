@@ -94,7 +94,7 @@ export default function App({ navigation, route }) {
       </View>
       <View style={styles.checkoutBottom} >
         <View style={{ flexDirection: 'row', height: 20 }}>
-          <Text style={styles.price}>{route.params.price}</Text>
+          <Text style={styles.price}>${route.params.price.toFixed(2)}</Text>
           <RatingStar style={{ flex: 1, marginTop: 20, marginRight: 30, marginBottom: 20, }} />
         </View>
         <Text style={styles.title}>{route.params.title}</Text>

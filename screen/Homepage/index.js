@@ -57,6 +57,7 @@ export default function App({ navigation, route }) {
     },
   ];
   const Temp = counter.Product;
+
   const test = [{
     id: 0,
     title: 'Minimal Chair ',
@@ -86,9 +87,10 @@ export default function App({ navigation, route }) {
       setseach(text);
     }
   };
-  const ItemBottom = ({ title, dec, price, pic }) => (
+  const ItemBottom = ({ title, dec, price, pic ,id}) => (
     <TouchableOpacity style={[styles.itemBottom, styles.ShadowItem]} onPress={() =>
       navigation.navigate('DetaiPage', {
+        id: id,
         title: title,
         price: price,
         dec: dec,
@@ -108,10 +110,11 @@ export default function App({ navigation, route }) {
       </View>
     </TouchableOpacity>
   );
-  const ItemAbove = ({ title, dec, price, pic, item }) => (
+  const ItemAbove = ({ title, dec, price, pic, item ,id}) => (
     <View style={{ overflow: 'hidden', }}>
       <TouchableOpacity style={[styles.itemAbove, styles.ShadowItem]} onPress={() =>
         navigation.navigate('DetaiPage', {
+          id: id,
           title: title,
           price: price,
           dec: dec,
@@ -144,7 +147,7 @@ export default function App({ navigation, route }) {
     <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} item={item} />
   );
   const renderItemAbove = ({ item }) => (
-    <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} />
+    <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic}id={item.id} />
   );
   const storeData = async (value) => {
     try {

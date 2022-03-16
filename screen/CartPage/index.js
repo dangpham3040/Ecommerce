@@ -28,7 +28,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
 import { createStore } from 'redux';
 import *as ACTION from '../../actions';
-import *as counter from'../../redux/counter';
+import *as counter from '../../redux/counter';
 
 const store = createStore(allReducter);
 
@@ -62,25 +62,24 @@ export default function App({ navigation }) {
       quantity: 1,
     },
   ];
-  const Temp = counter. Carts;
-  console.log("so luong : "+Temp.length);
+  const Temp = counter.Carts;
   console.log("\n\n**************************");
-
-
+  console.log("so luong : " + Temp.length);
   const [listitem, setlistitem] = useState([]);
   const [total, settotal] = useState(0);
   const [ship, setShip] = useState(30);
   const [totalMoney, settotalMoney] = useState(ship);
-
+  const dispatch = useDispatch();
   const handleCheck = (i) => {
-    if (listitem[i].check === "true") {
-      listitem[i].check = "false";
+    var index;
 
+    if (Temp[i].check === "true") {
+      Temp[i].check = "false";
     }
     else {
-      listitem[i].check = "true";
+      Temp[i].check = "true";
     }
-    storeData(listitem)
+    storeData(Temp)
     getData()
     console.log("\n\n***************************")
     for (var c = 0; c < listitem.length; c++) {
@@ -89,18 +88,20 @@ export default function App({ navigation }) {
     handltotal()
   }
   const handladd = (i) => {
-    listitem[i].amount = listitem[i].amount + 1;
-    storeData(listitem)
-    getData()
-    if (listitem[i].check === "true") {
-      handltotal()
+    if (Temp[i].quantity > 0) {
+      Temp[i].quantity = Temp[i].quantity + 1;
+      storeData(Temp)
+      getData()
+      if (listitem[i].check === "true") {
+        handltotal()
+      }
     }
 
   }
   const handldel = (i) => {
-    if (DATA[i].amount > 0) {
-      listitem[i].amount = DATA[i].amount - 1;
-      storeData(listitem)
+    if (Temp[i].quantity > 0) {
+      Temp[i].quantity = Temp[i].quantity - 1;
+      storeData(Temp)
       getData()
       if (listitem[i].check === "true") {
         handltotal()
@@ -113,11 +114,11 @@ export default function App({ navigation }) {
         {
           check === "true" ? <CheckedIcon style={{ marginRight: 15 }} onPress={() => handleCheck(id)} /> : <UnCheck style={{ marginRight: 15 }} onPress={() => handleCheck(id)} />
         }
-        <Image source={{uri: pic}} style={{ flex: 1, height: 70, width: 70, marginRight: 15, borderRadius: 20 }} />
+        <Image source={{ uri: pic }} style={{ flex: 1, height: 70, width: 70, marginRight: 15, borderRadius: 20 }} />
         <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
           <Text style={styles.title}>{title}</Text>
           <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
-            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price}</Text>
+            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
             <View style={styles.add_del}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text onPress={(() => handladd(id))}>+</Text>
@@ -134,9 +135,9 @@ export default function App({ navigation }) {
   );
   const handltotal = () => {
     var total = 0;
-    for (var i = 0; i < listitem.length; i++) {
-      if (listitem[i].check === "true") {
-        total += listitem[i].price * listitem[i].amount;
+    for (var i = 0; i < Temp.length; i++) {
+      if (Temp[i].check === "true") {
+        total += Temp[i].price * Temp[i].quantity;
       }
     }
     settotal(total);
@@ -173,7 +174,7 @@ export default function App({ navigation }) {
         <View>
         </View>
         <View style={styles.header}>
-          <GoBackIcon onPress={() => navigation.goBack() }/>
+          <GoBackIcon onPress={() => navigation.goBack()} />
           <Text style={styles._title}>Cart</Text>
           <ShoppingCartsIcon />
         </View>
