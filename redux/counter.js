@@ -31,33 +31,34 @@ export const Product = [
 export const Carts = [
 
 ];
-
+export const NumbersCart = 0;
 const initProduct = {
     numberCart: 0,
     Carts: [],
-    _products: [{
-        id: 0,
-        title: 'Minimal Chair ',
-        price: 235,
-        dec: 'lorem Ipsum',
-        pic: 'https://jusdialogus.com/wp-content/uploads/2019/09/p1.jpg',
-    },
-    {
-        id: 1,
-        title: 'Elegant White Chair',
-        price: 124,
-        dec: 'lorem Ipsum',
-        pic: 'https://lh3.googleusercontent.com/2o4Zp9_zvsh_BIlNo2s3WwOb-zZrlhDNuC43SDaGRQp_fWBoRJPL27JWH3at40jk52IY=s85',
+    _products: [
+        {
+            id: 0,
+            title: 'Minimal Chair ',
+            price: 235,
+            dec: 'lorem Ipsum',
+            pic: 'https://jusdialogus.com/wp-content/uploads/2019/09/p1.jpg',
+        },
+        {
+            id: 1,
+            title: 'Elegant White Chair',
+            price: 124,
+            dec: 'lorem Ipsum',
+            pic: 'https://lh3.googleusercontent.com/2o4Zp9_zvsh_BIlNo2s3WwOb-zZrlhDNuC43SDaGRQp_fWBoRJPL27JWH3at40jk52IY=s85',
 
-    },
-    {
-        id: 2,
-        title: 'Vintage Chair',
-        price: 89,
-        dec: 'lorem Ipsum',
-        pic: 'https://decosy.com/web/image/product.template/379/image',
+        },
+        {
+            id: 2,
+            title: 'Vintage Chair',
+            price: 89,
+            dec: 'lorem Ipsum',
+            pic: 'https://decosy.com/web/image/product.template/379/image',
 
-    },]
+        },]
 }
 class product {
     constructor(id, title, price, dec, pic) {
@@ -79,17 +80,56 @@ export const counterReducer = (state = initProduct, action) => {
     const p = new product(action.id, action.title, action.price, action.dec, action.pic);
     switch (action.type) {
         case "ADD_CART":
-            if (cartExists(p.id)) {
-                console.log('Đã có trong giỏ hàng')
+            if (state.numberCart == 0) {
+                state.Carts.push(p);
+                state.numberCart++;
             }
             else {
-                return Carts.push(p);
+                let check = false;
+                state.Carts.map((item, key) => {
+                    if (item.id == action.id) {
+                        state.Carts[key].quantity++;
+                        check = true;
+                    }
+                });
+                if (!check) {
+                    state.Carts.push(p);
+                    state.numberCart++;
+                }
             }
+         console.log("coint : "+state.numberCart);
+            return state;
 
         case 'ADD_quantity':
-            return Carts[p.id].quantity = 11;
+            state.Carts.map((item, key) => {
+                if (item.id == action.id) {
+                    state.Carts[key].quantity++;
+                }
+            });
+            return {
+                ...state,
+                numberCart: state.numberCart + 1
+            }
+            return state;
         case 'DEC_quantity':
-            return Carts[p.id].quantity = 1;
+            state.Carts.map((item, key) => {
+                if (item.id == action.id) {
+                    state.Carts[key].quantity--;
+                }
+            });
+            return {
+                ...state,
+                numberCart: state.numberCart - 1
+            }
+            return state;
+        case 'GET_product':
+            return {
+                ...state,
+            }
+        case 'GET_numbercart':
+            return {
+                ...state
+            }
         default:
             return state;
     }

@@ -29,6 +29,7 @@ import allReducter from '../../redux';
 import { createStore } from 'redux';
 import *as ACTION from '../../actions';
 import *as counter from '../../redux/counter';
+import { connect } from 'react-redux'
 
 const store = createStore(allReducter);
 
@@ -62,17 +63,19 @@ export default function App({ navigation }) {
       quantity: 1,
     },
   ];
-  const Temp = counter.Carts;
-  console.log("\n\n**************************");
-  console.log("so luong : " + Temp.length);
+
   const [listitem, setlistitem] = useState([]);
   const [total, settotal] = useState(0);
   const [ship, setShip] = useState(30);
   const [totalMoney, settotalMoney] = useState(ship);
+  
   const dispatch = useDispatch();
+  const list = useSelector(state => state.Carts);
+  const Temp = list;
+  const count =useSelector(state=>state.numberCart);
+  console.log("\n\n**************************");
+  console.log("so luong : " + Temp.length);
   const handleCheck = (i) => {
-    var index;
-
     if (Temp[i].check === "true") {
       Temp[i].check = "false";
     }
@@ -163,7 +166,7 @@ export default function App({ navigation }) {
   // var temp = store.dispatch({type:'GET_ALL_PRODUCT',payload:[DATA]});
 
   useEffect(() => {
-    storeData(Temp)
+    storeData(list)
     getData()
   }, [])
 
@@ -176,7 +179,15 @@ export default function App({ navigation }) {
         <View style={styles.header}>
           <GoBackIcon onPress={() => navigation.goBack()} />
           <Text style={styles._title}>Cart</Text>
-          <ShoppingCartsIcon />
+          <View
+            style={{ flexDirection: 'row' }}>
+            <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
+            {
+              Temp.length > 0 ? <View style={{ left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center' }}>
+                <Text style={{ color: '#fff', fontSize: 10, fontWeight: 'bold' }}>{Temp.length}</Text>
+              </View> : null
+            }
+          </View>
         </View>
         <FlatList
           nestedScrollEnabled

@@ -26,13 +26,18 @@ import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import UserIcon from '../../icons/UserIcon/UserIcon';
 import AddIcon from '../../icons/AddIcon/AddIcon';
 import HeartIcon from '../../icons/HeartIcon/HeartIcon'
-import LayoutBottomIcon from '../../icons/LayoutBottomIcon/LayoutBottomIcon'
 import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import *as counter from '../../redux/counter';
 import { Keyboard } from 'react-native'
+import allReducter from '../../redux';
+import { createStore } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux'
 
-export default function App({ navigation, route }) {
+
+
+const store = createStore(allReducter);
+function App({ navigation, route }) {
   const DATA = [
     {
       id: 0,
@@ -56,8 +61,6 @@ export default function App({ navigation, route }) {
       pic: require('../../pic/Vintage_Chair.jpg'),
     },
   ];
-  const Temp = counter.Product;
-
   const test = [{
     id: 0,
     title: 'Minimal Chair ',
@@ -65,9 +68,15 @@ export default function App({ navigation, route }) {
     dec: 'lorem Ipsum',
     pic: 'https://jusdialogus.com/wp-content/uploads/2019/09/p1.jpg',
   },]
+  const [num, setNum] = useState(0);
   const [listitem, setlistitem] = useState([]);
   const [seach, setseach] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
+
+  const dispatch = useDispatch();
+  const list = useSelector(state => state._products);
+  const Temp = list;
+  const list_cart =useSelector(state=>state.Carts);
 
   const handleSearch = (text) => {
     if (text) {
@@ -87,7 +96,7 @@ export default function App({ navigation, route }) {
       setseach(text);
     }
   };
-  const ItemBottom = ({ title, dec, price, pic ,id}) => (
+  const ItemBottom = ({ title, dec, price, pic, id }) => (
     <TouchableOpacity style={[styles.itemBottom, styles.ShadowItem]} onPress={() =>
       navigation.navigate('DetaiPage', {
         id: id,
@@ -110,7 +119,7 @@ export default function App({ navigation, route }) {
       </View>
     </TouchableOpacity>
   );
-  const ItemAbove = ({ title, dec, price, pic, item ,id}) => (
+  const ItemAbove = ({ title, dec, price, pic, item, id }) => (
     <View style={{ overflow: 'hidden', }}>
       <TouchableOpacity style={[styles.itemAbove, styles.ShadowItem]} onPress={() =>
         navigation.navigate('DetaiPage', {
@@ -147,7 +156,7 @@ export default function App({ navigation, route }) {
     <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} item={item} />
   );
   const renderItemAbove = ({ item }) => (
-    <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic}id={item.id} />
+    <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} id={item.id} />
   );
   const storeData = async (value) => {
     try {
@@ -164,10 +173,20 @@ export default function App({ navigation, route }) {
       console.log(e);
     }
   }
+  const set_numbercart = async () => {
+    try {
+      const count = useSelector(state => state.numberCart);
+      const value = await AsyncStorage.getItem('count')
+      return value != null ? setNum(count) : 0
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     storeData(Temp)
     getData()
-
+ 
   }, [])
   return (
     <View style={{ height: '100%', width: '100%', backgroundColor: '#f5f6fa', }}>
@@ -177,7 +196,10 @@ export default function App({ navigation, route }) {
           <MenuIcon style={{ flex: 1 }} />
           <UserIcon style={{ flex: 1 }} />
         </View>
-        <View style={[{ flexDirection: "row" }, styles.margin_layout]}>
+        <View style={{
+          flexDirection: "row", marginLeft: 25,
+          marginRight: 25,
+        }}>
           <View style={[styles.searchView, styles.ShadowItem]}>
             <SeachIcon style={{ margin: 10 }} />
             <TextInput
@@ -185,7 +207,15 @@ export default function App({ navigation, route }) {
               style={styles.searchInput}
               placeholder="Seach" />
           </View>
-          <ShoppingCartsIcon style={{ marginTop: 60 }} onPress={() => navigation.navigate('CartPage')} />
+          <View style={{ marginTop: 50, flexDirection: 'row' }}>
+            <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
+            {
+              list_cart.length > 0 ? <View style={{ left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center' }}>
+                <Text style={{ color: '#fff', fontSize: 10, fontWeight: 'bold' }}>{list_cart.length}</Text>
+              </View> : null
+            }
+
+          </View>
         </View>
         {
           seach === "" ?
@@ -228,6 +258,15 @@ export default function App({ navigation, route }) {
     </View>
   );
 }
+
+const mapStateToProps = state => {
+  return { number: state.counter || 0 }
+};
+
+
+export default connect(mapStateToProps, null)(App);
+
+
 
 
 

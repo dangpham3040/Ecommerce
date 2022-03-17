@@ -5,8 +5,8 @@
  * @format
  * @flow strict-local
  */
+ import React, { useEffect, useState } from 'react';
 
-import React from 'react';
 
 import {
   SafeAreaView,
@@ -29,6 +29,7 @@ import *as ACTION from '../../actions';
 import { createStore } from 'redux';
 import *as counter from '../../redux/counter';
 
+
 const store = createStore(allReducter);
 const images = [
   require('../../pic/Minimal_Chair.png'),
@@ -40,6 +41,22 @@ const images = [
 
 export default function App({ navigation, route }) {
   const dispatch = useDispatch();
+  const [num, setNum] = useState(0);
+  const list_cart =useSelector(state=>state.Carts);
+  const set_numbercart = async () => {
+    try {
+      store.dispatch({type:'GET_numbercart'});
+      const count = useSelector(state => state.numberCart);
+      const value = await AsyncStorage.getItem('count')
+      return value != null ? setNum(count) : 0
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
+  useEffect(() => {
+ 
+  }, [])
   return (
     <SafeAreaView style={styles.container}>
       <View style={{
@@ -50,10 +67,21 @@ export default function App({ navigation, route }) {
         width: "100%",
       }}>
         <View style={styles.headericon}>
-          <View style={{ flexDirection: 'row', justifyContent: "space-between", paddingHorizontal: 25, backgroundColor: '#fff' }}>
+          <View style={{ flexDirection: 'row', justifyContent: "space-between", paddingHorizontal: 25, backgroundColor: '#fff', alignItems: 'center' }}>
             <GoBackIcon onPress={() => navigation.navigate('HomePage')} />
             <Text style={styles.titleProduct}>Product</Text>
-            <ShoppingCartsIcon onPress={() => navigation.navigate('CartPage')} />
+            <View style={{ flexDirection: 'row' }}>
+              <View
+                style={{ flexDirection: 'row' }}>
+                <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
+                {
+                 list_cart.length > 0 ?
+                    <View style={{ left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center' }}>
+                      <Text style={{ color: '#fff', fontSize: 10, fontWeight: 'bold' }}>{ list_cart.length}</Text>
+                    </View> : null
+                }
+              </View>
+            </View>
           </View>
           <SliderBox
             style={{
@@ -121,4 +149,7 @@ export default function App({ navigation, route }) {
       </View>
     </SafeAreaView >
   );
+}
+function refreshPage(){ 
+  window.location.reload(); 
 }

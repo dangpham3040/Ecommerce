@@ -19,6 +19,7 @@
     "axios": "^0.26.1",
     "flat-carousel": "^0.0.1",
     "react": "17.0.2",
+    "react-icons": "^4.3.1",
     "react-native": "0.67.3",
     "react-native-check-box": "^2.1.7",
     "react-native-fast-image": "^8.5.11",
