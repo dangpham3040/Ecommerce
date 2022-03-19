@@ -3,34 +3,7 @@
 import { ADD, DEL } from '../actions';
 import *as ACTION from '../actions';
 import { State } from 'react-native-gesture-handler';
-export const Product = [
-    {
-        id: 0,
-        title: 'Minimal Chair ',
-        price: 235,
-        dec: 'lorem Ipsum',
-        pic: 'https://jusdialogus.com/wp-content/uploads/2019/09/p1.jpg',
-    },
-    {
-        id: 1,
-        title: 'Elegant White Chair',
-        price: 124,
-        dec: 'lorem Ipsum',
-        pic: 'https://lh3.googleusercontent.com/2o4Zp9_zvsh_BIlNo2s3WwOb-zZrlhDNuC43SDaGRQp_fWBoRJPL27JWH3at40jk52IY=s85',
 
-    },
-    {
-        id: 2,
-        title: 'Vintage Chair',
-        price: 89,
-        dec: 'lorem Ipsum',
-        pic: 'https://decosy.com/web/image/product.template/379/image',
-
-    },
-]
-export const Carts = [
-
-];
 export const NumbersCart = 0;
 const initProduct = {
     numberCart: 0,
@@ -97,7 +70,7 @@ export const counterReducer = (state = initProduct, action) => {
                     state.numberCart++;
                 }
             }
-         console.log("coint : "+state.numberCart);
+         console.log("cong : "+state.numberCart);
             return state;
 
         case 'ADD_quantity':

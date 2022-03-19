@@ -76,7 +76,8 @@ function App({ navigation, route }) {
   const dispatch = useDispatch();
   const list = useSelector(state => state._products);
   const Temp = list;
-  const list_cart =useSelector(state=>state.Carts);
+  const list_cart = useSelector(state => state.Carts);
+  var count = useSelector(state => state.numberCart);
 
   const handleSearch = (text) => {
     if (text) {
@@ -175,9 +176,16 @@ function App({ navigation, route }) {
   }
   const set_numbercart = async () => {
     try {
-      const count = useSelector(state => state.numberCart);
-      const value = await AsyncStorage.getItem('count')
-      return value != null ? setNum(count) : 0
+       count = useSelector(state => state.numberCart);
+      await AsyncStorage.setItem('num', JSON.stringify(count))
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const get_numbercart = async () => {
+    try {
+      const value = await AsyncStorage.getItem('num')
+      return value != null ? setNum(JSON.parse(value)) : 0
     } catch (e) {
       console.log(e);
     }
@@ -186,8 +194,17 @@ function App({ navigation, route }) {
   useEffect(() => {
     storeData(Temp)
     getData()
- 
-  }, [])
+    // set_numbercart()
+    // get_numbercart()
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log('Refreshed: '+list_cart.length);
+      setNum(list_cart.length)
+    });
+    return unsubscribe;
+  
+  }, [] )
+
+    
   return (
     <View style={{ height: '100%', width: '100%', backgroundColor: '#f5f6fa', }}>
       <SafeAreaView style={styles.container}>

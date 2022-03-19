@@ -68,11 +68,11 @@ export default function App({ navigation }) {
   const [total, settotal] = useState(0);
   const [ship, setShip] = useState(30);
   const [totalMoney, settotalMoney] = useState(ship);
-  
+
   const dispatch = useDispatch();
   const list = useSelector(state => state.Carts);
   const Temp = list;
-  const count =useSelector(state=>state.numberCart);
+  const count = useSelector(state => state.numberCart);
   console.log("\n\n**************************");
   console.log("so luong : " + Temp.length);
   const handleCheck = (i) => {
@@ -91,24 +91,29 @@ export default function App({ navigation }) {
     handltotal()
   }
   const handladd = (i) => {
-    if (Temp[i].quantity > 0) {
-      Temp[i].quantity = Temp[i].quantity + 1;
-      storeData(Temp)
-      getData()
-      if (listitem[i].check === "true") {
+    Temp.map((item, key) => {
+      if (item.id == i) {
+        Temp[key].quantity++;
+        storeData(Temp)
+        getData()
+      }
+      if (Temp[i].check === "true") {
         handltotal()
       }
-    }
-
+    });
   }
   const handldel = (i) => {
     if (Temp[i].quantity > 0) {
-      Temp[i].quantity = Temp[i].quantity - 1;
-      storeData(Temp)
-      getData()
-      if (listitem[i].check === "true") {
+      Temp.map((item, key) => {
+      if (item.id == i) {
+        Temp[key].quantity--;
+        storeData(Temp)
+        getData()
+      }
+      if (Temp[i].check === "true") {
         handltotal()
       }
+    });
     }
   }
   const Item = ({ title, price, pic, check, quantity, id }) => (
@@ -162,12 +167,10 @@ export default function App({ navigation }) {
       console.log(e);
     }
   }
-  // const dispatch = useDispatch();
-  // var temp = store.dispatch({type:'GET_ALL_PRODUCT',payload:[DATA]});
-
   useEffect(() => {
     storeData(list)
     getData()
+    handltotal()
   }, [])
 
   return (
@@ -200,27 +203,28 @@ export default function App({ navigation }) {
 
       <View style={[styles.backgroundBottom, styles.Shadow]} >
         <View style={styles.bottomCheckout}>
-          <Text style={{ color: "#2A2D3F", flex: 4 }}>Selected Items</Text>
+          <Text style={{ color: "#2A2D3F", flex: 2 }}>Selected Items</Text>
           <Text style={{
-            color: "#F26B6B", flex: 1,
-            alignSelf: 'flex-end',
-
+            color: "#F26B6B", flex: 4,
+            textAlign: 'right'
           }}>${total.toFixed(2)}</Text>
         </View>
         <View style={styles.bottomCheckout}>
-          <Text style={{ color: "#2A2D3F", flex: 4 }}>Shipping Fee</Text>
+          <Text style={{ color: "#2A2D3F", flex: 2 }}>Shipping Fee</Text>
           <Text style={{
-            color: "#F26B6B", flex: 1,
+            color: "#F26B6B", flex: 4,
+            textAlign: 'right'
           }}>${ship.toFixed(3)}</Text>
         </View>
 
         <View style={styles.line} />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', left: 30, bottom: 150 }}>
-          <Text style={{ color: "#2A2D3F", flex: 3.5, fontWeight: 'bold', fontSize: 20 }}>Subtotal</Text>
+          <Text style={{ color: "#2A2D3F", flex: 2, fontWeight: 'bold', fontSize: 20 }}>Subtotal</Text>
           <Text style={{
-            color: "#F26B6B", flex: 1,
+            color: "#F26B6B", flex: 3.5,
             fontWeight: '600',
             fontSize: 20,
+            textAlign: 'right'
           }}>${totalMoney.toFixed(2)}</Text>
 
         </View>
