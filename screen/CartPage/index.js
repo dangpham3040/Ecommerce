@@ -16,7 +16,7 @@ import {
   View,
   FlatList,
   Image,
-
+  Alert
 } from 'react-native';
 import GoBackIcon from '../../icons/GoBackIcon/GoBackIcon'
 import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
@@ -34,54 +34,56 @@ import { connect } from 'react-redux'
 const store = createStore(allReducter);
 
 export default function App({ navigation }) {
-  const DATA = [
-    {
-      id: 0,
-      title: 'Minimal Chair ',
-      price: 235,
-      dec: 'lorem Ipsum',
-      pic: require('../../pic/Minimal_Chair.png'),
-      check: "false",
-      quantity: 1,
-    },
-    {
-      id: 1,
-      title: 'Elegant White Chair',
-      price: 124,
-      dec: 'lorem Ipsum',
-      pic: require('../../pic/Elegant_White_Chair.jpg'),
-      check: "false",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      title: 'Vintage Chair',
-      price: 89,
-      dec: 'lorem Ipsum',
-      pic: require('../../pic/Vintage_Chair.jpg'),
-      check: "false",
-      quantity: 1,
-    },
-  ];
 
   const [listitem, setlistitem] = useState([]);
   const [total, settotal] = useState(0);
   const [ship, setShip] = useState(30);
-  const [totalMoney, settotalMoney] = useState(ship);
+  const [totalMoney, settotalMoney] = useState(0);
 
   const dispatch = useDispatch();
   const list = useSelector(state => state.Carts);
-  const Temp = list;
   const count = useSelector(state => state.numberCart);
+  const Temp = list;
   console.log("\n\n**************************");
   console.log("so luong : " + Temp.length);
+  const Item = ({ title, price, pic, check, quantity, id }) => (
+    <View style={styles.item}>
+      <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
+        {
+          check === "true" ? <CheckedIcon style={{ marginRight: 15 }} onPress={() => handleCheck(id)} /> : <UnCheck style={{ marginRight: 15 }} onPress={() => handleCheck(id)} />
+        }
+        <Image source={{ uri: pic }} style={{ flex: 1, height: 70, width: 70, marginRight: 15, borderRadius: 20 }} />
+        <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
+          <Text style={styles.title}>{title}</Text>
+          <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
+            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
+            <View style={styles.add_del}>
+              <View style={{ flexDirection: 'row' ,justifyContent: 'center'}}>
+                <Text onPress={(() => handladd(id))}>+</Text>
+                <Text style={{marginLeft:5,marginRight:5}}>{quantity}</Text>
+                <Text onPress={() => handldel(id)}>-</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View >);
+
+  const renderItem = ({ item }) => (
+    <Item title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} quantity={item.quantity} />
+  );
   const handleCheck = (i) => {
-    if (Temp[i].check === "true") {
-      Temp[i].check = "false";
-    }
-    else {
-      Temp[i].check = "true";
-    }
+    Temp.map((item, key) => {
+      if (item.id == i) {
+        if (Temp[key].check === "true") {
+          Temp[key].check = "false";
+        }
+        else {
+          Temp[key].check = "true";
+        }
+      }
+
+    });
     storeData(Temp)
     getData()
     console.log("\n\n***************************")
@@ -103,55 +105,47 @@ export default function App({ navigation }) {
     });
   }
   const handldel = (i) => {
-    if (Temp[i].quantity > 0) {
-      Temp.map((item, key) => {
+    Temp.map((item, key) => {
       if (item.id == i) {
-        Temp[key].quantity--;
+        if (Temp[key].quantity > 1)
+          Temp[key].quantity--;
         storeData(Temp)
         getData()
       }
-      if (Temp[i].check === "true") {
+      if (Temp[key].check === "true") {
         handltotal()
       }
     });
-    }
-  }
-  const Item = ({ title, price, pic, check, quantity, id }) => (
-    <View style={styles.item}>
-      <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
-        {
-          check === "true" ? <CheckedIcon style={{ marginRight: 15 }} onPress={() => handleCheck(id)} /> : <UnCheck style={{ marginRight: 15 }} onPress={() => handleCheck(id)} />
-        }
-        <Image source={{ uri: pic }} style={{ flex: 1, height: 70, width: 70, marginRight: 15, borderRadius: 20 }} />
-        <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
-          <Text style={styles.title}>{title}</Text>
-          <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
-            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
-            <View style={styles.add_del}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text onPress={(() => handladd(id))}>+</Text>
-                <Text >{quantity}</Text>
-                <Text onPress={() => handldel(id)}>-</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View >);
-  const renderItem = ({ item }) => (
-    <Item title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} quantity={item.quantity} />
-  );
-  const handltotal = () => {
-    var total = 0;
-    for (var i = 0; i < Temp.length; i++) {
-      if (Temp[i].check === "true") {
-        total += Temp[i].price * Temp[i].quantity;
-      }
-    }
-    settotal(total);
-    settotalMoney(total + ship);
 
   }
+
+  const handltotal = () => {
+    var total = 0;
+    if (Temp.length > 0) {
+      for (var i = 0; i < Temp.length; i++) {
+        if (Temp[i].check === "true") {
+          total += Temp[i].price * Temp[i].quantity;
+        }
+      }
+      settotal(total);
+      settotalMoney(total + ship);
+    }
+  }
+  const handlnotification = () => {
+    Alert.alert(
+      'confirm your purchase ',
+      'Are you sure ?',
+      [
+        { text: 'Yes', onPress: () => console.log('Yes Pressed') },
+        {
+          text: ' No',
+          onPress: () => console.log('No Pressed'),
+          style: 'cancel'
+        },
+      ],
+      { cancelable: true }
+    );
+  };
   const storeData = async (data) => {
     try {
       await AsyncStorage.setItem('list', JSON.stringify(data))
@@ -167,6 +161,7 @@ export default function App({ navigation }) {
       console.log(e);
     }
   }
+
   useEffect(() => {
     storeData(list)
     getData()
@@ -174,6 +169,7 @@ export default function App({ navigation }) {
   }, [])
 
   return (
+
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
       <View style={{ flex: 2, }}>
@@ -231,9 +227,12 @@ export default function App({ navigation }) {
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
           <View
             style={styles.CheckOutButton}>
-            <Text style={{ color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 }} >Checkout</Text>
+            <Text style={{ color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 }} onPress={() => {
+              handlnotification()
+            }} >Checkout</Text>
           </View>
         </View>
+
       </View>
 
     </SafeAreaView >

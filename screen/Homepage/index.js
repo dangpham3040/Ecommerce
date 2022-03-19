@@ -38,29 +38,6 @@ import { connect } from 'react-redux'
 
 const store = createStore(allReducter);
 function App({ navigation, route }) {
-  const DATA = [
-    {
-      id: 0,
-      title: 'Minimal Chair ',
-      price: 25,
-      dec: 'lorem Ipsum',
-      pic: require('../../pic/Minimal_Chair.png'),
-    },
-    {
-      id: 1,
-      title: 'Elegant White Chair',
-      price: 25,
-      dec: 'lorem Ipsum',
-      pic: require('../../pic/Elegant_White_Chair.jpg'),
-    },
-    {
-      id: 2,
-      title: 'Vintage Chair',
-      price: 25,
-      dec: 'lorem Ipsum',
-      pic: require('../../pic/Vintage_Chair.jpg'),
-    },
-  ];
   const test = [{
     id: 0,
     title: 'Minimal Chair ',
@@ -75,28 +52,15 @@ function App({ navigation, route }) {
 
   const dispatch = useDispatch();
   const list = useSelector(state => state._products);
-  const Temp = list;
-  const list_cart = useSelector(state => state.Carts);
-  var count = useSelector(state => state.numberCart);
 
-  const handleSearch = (text) => {
-    if (text) {
-      const newData = listitem.filter(function (item) {
-        const itemData = item.title
-          ? item.title.toUpperCase()
-          : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredDataSource(newData);
-      setseach(text);
-    }
-    else {
-      Keyboard.dismiss();
-      setFilteredDataSource(listitem);
-      setseach(text);
-    }
-  };
+  const list_cart = useSelector(state => state.Carts);
+  const Temp = list;
+  const renderItemBottom = ({ item }) => (
+    <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} item={item} />
+  );
+  const renderItemAbove = ({ item }) => (
+    <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} id={item.id} />
+  );
   const ItemBottom = ({ title, dec, price, pic, id }) => (
     <TouchableOpacity style={[styles.itemBottom, styles.ShadowItem]} onPress={() =>
       navigation.navigate('DetaiPage', {
@@ -152,13 +116,24 @@ function App({ navigation, route }) {
       </TouchableOpacity >
     </View>
   );
-
-  const renderItem = ({ item }) => (
-    <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} item={item} />
-  );
-  const renderItemAbove = ({ item }) => (
-    <ItemAbove title={item.title} dec={item.dec} price={item.price} pic={item.pic} id={item.id} />
-  );
+  const handleSearch = (text) => {
+    if (text) {
+      const newData = listitem.filter(function (item) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setseach(text);
+    }
+    else {
+      Keyboard.dismiss();
+      setFilteredDataSource(listitem);
+      setseach(text);
+    }
+  };
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem('list', JSON.stringify(value))
@@ -174,28 +149,9 @@ function App({ navigation, route }) {
       console.log(e);
     }
   }
-  const set_numbercart = async () => {
-    try {
-       count = useSelector(state => state.numberCart);
-      await AsyncStorage.setItem('num', JSON.stringify(count))
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  const get_numbercart = async () => {
-    try {
-      const value = await AsyncStorage.getItem('num')
-      return value != null ? setNum(JSON.parse(value)) : 0
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   useEffect(() => {
     storeData(Temp)
     getData()
-    // set_numbercart()
-    // get_numbercart()
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Refreshed: '+list_cart.length);
       setNum(list_cart.length)
@@ -204,7 +160,6 @@ function App({ navigation, route }) {
   
   }, [] )
 
-    
   return (
     <View style={{ height: '100%', width: '100%', backgroundColor: '#f5f6fa', }}>
       <SafeAreaView style={styles.container}>
@@ -253,7 +208,7 @@ function App({ navigation, route }) {
                 <Text style={[styles.titleItem]}>Best Selling</Text>
                 <FlatList
                   data={test}
-                  renderItem={renderItem}
+                  renderItem={renderItemBottom}
                   keyExtractor={item => item.id}
                 />
               </View>
@@ -265,7 +220,7 @@ function App({ navigation, route }) {
                 numColumns={1}
                 style={{ marginTop: 20, flex: 1 }}
                 data={filteredDataSource}
-                renderItem={renderItem}
+                renderItem={renderItemBottom}
                 keyExtractor={item => item.id}
 
               />

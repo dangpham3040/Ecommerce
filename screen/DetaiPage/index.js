@@ -32,10 +32,10 @@ import *as counter from '../../redux/counter';
 
 const store = createStore(allReducter);
 const images = [
-  require('../../pic/Minimal_Chair.png'),
+  require('../../pic/Minimal_Chair.jpg'),
   require('../../pic/Elegant_White_Chair.jpg'),
   require('../../pic/Vintage_Chair.jpg'),
-  require('../../pic/Vintage_Chair.jpg'),
+  require('../../pic/Minimal_Chair1.jpg'),
 ];
 
 

@@ -130,7 +130,7 @@ export const styles = StyleSheet.create({
     alignContent: "center",
     marginLeft: 10,
     backgroundColor: '#fff',
-    width: '35%',
+    width: '30%',
     height: '70%',
     borderRadius: 50,
     borderColor: '#DDDDE8',
@@ -155,7 +155,64 @@ export const styles = StyleSheet.create({
     shadowRadius: 13.16,
     
     elevation: 20,
-}
+},
+MainContainer :{
+    
+  flex:1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: (Platform.OS == 'ios') ? 20 : 0
+  
+ },
+  
+ Alert_Main_View:{
+  
+   alignItems: 'center',
+   justifyContent: 'center',
+   backgroundColor : "#fff", 
+   height: 200 ,
+   width: '90%',
+   borderWidth: 1,
+   borderColor: '#fff',
+   borderRadius:7,
+  
+ },
+  
+ Alert_Title:{
+  
+   fontSize: 25, 
+   color: "#fff",
+   textAlign: 'center',
+   padding: 10,
+   height: '28%'
+  
+ },
+  
+ Alert_Message:{
+  
+     fontSize: 22, 
+     color: "#fff",
+     textAlign: 'center',
+     padding: 10,
+     height: '42%'
+    
+   },
+  
+ buttonStyle: {
+     
+     width: '50%',
+     height: '100%',
+     justifyContent: 'center',
+     alignItems: 'center'
+  
+ },
+    
+ TextStyle:{
+     color:'#fff',
+     textAlign:'center',
+     fontSize: 22,
+     marginTop: -5
+ }
 });
 
 
