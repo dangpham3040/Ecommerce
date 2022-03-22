@@ -8,13 +8,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingBottom: 50,
     top: 20,
-  
+
   },
   container: {
     flex: 1,
     justifyContent: 'space-between',
     backgroundColor: '#f5f6fa',
     flexDirection: 'column',
+
   },
   _title: {
     color: "#2A2D3F",
@@ -100,10 +101,30 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#F5F6FA',
     padding: 20,
+    marginHorizontal: 10,
+  },
+  item_dim: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    borderRadius: 20,
+    flexDirection: 'row',
+    backgroundColor: '#3c3c3c',
+    padding: 20,
     marginVertical: 8,
     marginHorizontal: 10,
   },
-
+  itemModal: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    borderRadius: 20,
+    flexDirection: 'row',
+    backgroundColor: '#F5F6FA',
+    padding: 5,
+    marginVertical: 5,
+    marginHorizontal: 10,
+  },
   bottomCheckout: {
     flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, paddingTop: 10
   },
@@ -122,6 +143,19 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     bottom: 20,
   },
+  closeButton:
+  {
+    marginLeft: 40,
+    backgroundColor: '#2A2D3F',
+    width: '80%',
+    height: '8%',
+    borderRadius: 50,
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    bottom: 20,
+
+  },
   add_del: {
     marginTop: 5,
     marginBottom: 5,
@@ -134,6 +168,7 @@ export const styles = StyleSheet.create({
     height: '70%',
     borderRadius: 50,
     borderColor: '#DDDDE8',
+
   },
   backgroundBottom: {
     flex: 1,
@@ -142,7 +177,7 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 45,
     paddingHorizontal: 30,
     paddingVertical: 10,
-    overflow :"hidden",
+    overflow: "hidden",
   },
   Shadow: {
     shadowColor: "#e2e5eb",
@@ -153,66 +188,85 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.51,
     shadowRadius: 13.16,
-    
+
     elevation: 20,
-},
-MainContainer :{
-    
-  flex:1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginTop: (Platform.OS == 'ios') ? 20 : 0
-  
- },
-  
- Alert_Main_View:{
-  
-   alignItems: 'center',
-   justifyContent: 'center',
-   backgroundColor : "#fff", 
-   height: 200 ,
-   width: '90%',
-   borderWidth: 1,
-   borderColor: '#fff',
-   borderRadius:7,
-  
- },
-  
- Alert_Title:{
-  
-   fontSize: 25, 
-   color: "#fff",
-   textAlign: 'center',
-   padding: 10,
-   height: '28%'
-  
- },
-  
- Alert_Message:{
-  
-     fontSize: 22, 
-     color: "#fff",
-     textAlign: 'center',
-     padding: 10,
-     height: '42%'
-    
-   },
-  
- buttonStyle: {
-     
-     width: '50%',
-     height: '100%',
-     justifyContent: 'center',
-     alignItems: 'center'
-  
- },
-    
- TextStyle:{
-     color:'#fff',
-     textAlign:'center',
-     fontSize: 22,
-     marginTop: -5
- }
+  },
+  MainContainer: {
+
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: (Platform.OS == 'ios') ? 20 : 0
+
+  },
+
+  Alert_Main_View: {
+
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#fff",
+    height: 200,
+    width: '90%',
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderRadius: 7,
+
+  },
+
+  Alert_Title: {
+
+    fontSize: 25,
+    color: "#fff",
+    textAlign: 'center',
+    padding: 10,
+    height: '28%'
+
+  },
+
+  Alert_Message: {
+
+    fontSize: 22,
+    color: "#fff",
+    textAlign: 'center',
+    padding: 10,
+    height: '42%'
+
+  },
+
+  buttonStyle: {
+
+    width: '50%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  },
+
+  TextStyle: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 22,
+    marginTop: -5
+  },
+  titleCheckOut:
+  {
+    marginTop: 20,
+    marginLeft: 85,
+    color: "#2A2D3F",
+    alignContent: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  numberCart:
+  {
+    left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center'
+  },
+  numberCart_dim:
+  {
+    left: 27, position: 'absolute', top: 7, backgroundColor: '#3c3c3c', borderRadius: 50, height: 15, width: 15, alignItems: 'center'
+  }
 });
 
 

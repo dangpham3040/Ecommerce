@@ -16,7 +16,9 @@ import {
   View,
   FlatList,
   Image,
-  Alert
+  Alert,
+  Modal,
+  TouchableOpacity
 } from 'react-native';
 import GoBackIcon from '../../icons/GoBackIcon/GoBackIcon'
 import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
@@ -39,6 +41,7 @@ export default function App({ navigation }) {
   const [total, settotal] = useState(0);
   const [ship, setShip] = useState(30);
   const [totalMoney, settotalMoney] = useState(0);
+  const [visible, setvisible] = useState(false);
 
   const dispatch = useDispatch();
   const list = useSelector(state => state.Carts);
@@ -47,8 +50,8 @@ export default function App({ navigation }) {
   console.log("\n\n**************************");
   console.log("so luong : " + Temp.length);
   const Item = ({ title, price, pic, check, quantity, id }) => (
-    <View style={styles.item}>
-      <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
+    <View style={[visible ? styles.item_dim : styles.item]}>
+      <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center' }}>
         {
           check === "true" ? <CheckedIcon style={{ marginRight: 15 }} onPress={() => handleCheck(id)} /> : <UnCheck style={{ marginRight: 15 }} onPress={() => handleCheck(id)} />
         }
@@ -58,9 +61,9 @@ export default function App({ navigation }) {
           <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
             <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
             <View style={styles.add_del}>
-              <View style={{ flexDirection: 'row' ,justifyContent: 'center'}}>
+              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <Text onPress={(() => handladd(id))}>+</Text>
-                <Text style={{marginLeft:5,marginRight:5}}>{quantity}</Text>
+                <Text style={{ marginLeft: 5, marginRight: 5 }}>{quantity}</Text>
                 <Text onPress={() => handldel(id)}>-</Text>
               </View>
             </View>
@@ -68,10 +71,46 @@ export default function App({ navigation }) {
         </View>
       </View>
     </View >);
-
+  const ItemModal = ({ title, price, pic, check, quantity, id }) => (
+    check === "true" ?
+      <View style={styles.itemModal}>
+        <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center' }}>
+          <Image source={{ uri: pic }} style={{ flex: 1, height: 70, width: 70, borderRadius: 20 }} />
+          <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
+            <Text style={styles.title}>{title}</Text>
+            <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
+              <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
+              <Text style={{ marginLeft: 5, marginRight: 5 }}>{quantity}</Text>
+            </View>
+          </View>
+        </View>
+      </View > : null);
+  const Itemcheckout = ({ title, price, pic, check, quantity, id }) => (
+    check === "true" ?
+      <View style={[styles.itemModal]}>
+        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Text style={[styles.title, { textAlign: 'left', flex: 2 }]}>{title}</Text>
+          <Text style={{ textAlign: 'center', flex: 2, color: "#F26B6B", fontSize: 15, fontWeight: '400', marginTop: 10 }}>${price.toFixed(2)}</Text>
+          <Text style={{ flex: 1, marginLeft: 5, marginRight: 5, marginTop: 10, textAlign: 'right' }}>{quantity}</Text>
+        </View>
+      </View > : null);
   const renderItem = ({ item }) => (
     <Item title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} quantity={item.quantity} />
   );
+  const renderItemModal = ({ item }) => (
+    <ItemModal title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} quantity={item.quantity} />
+  );
+  const renderItemcheckout = ({ item }) => (
+    <Itemcheckout title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} quantity={item.quantity} />
+  );
+  const handlModal = () => {
+    if (visible) {
+      setvisible(false);
+    }
+    else {
+      setvisible(true);
+    }
+  }
   const handleCheck = (i) => {
     Temp.map((item, key) => {
       if (item.id == i) {
@@ -99,7 +138,7 @@ export default function App({ navigation }) {
         storeData(Temp)
         getData()
       }
-      if (Temp[i].check === "true") {
+      if (Temp[key].check === "true") {
         handltotal()
       }
     });
@@ -133,15 +172,9 @@ export default function App({ navigation }) {
   }
   const handlnotification = () => {
     Alert.alert(
-      'confirm your purchase ',
-      'Are you sure ?',
+      'Please choose to continue',
       [
-        { text: 'Yes', onPress: () => console.log('Yes Pressed') },
-        {
-          text: ' No',
-          onPress: () => console.log('No Pressed'),
-          style: 'cancel'
-        },
+        { text: 'Yes', onPress: () => console.log('Yes Pressed'), style: 'cancel' },
       ],
       { cancelable: true }
     );
@@ -170,7 +203,7 @@ export default function App({ navigation }) {
 
   return (
 
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, visible ? { backgroundColor: '#3c3c3c' } : null]}>
       <StatusBar hidden />
       <View style={{ flex: 2, }}>
         <View>
@@ -182,8 +215,8 @@ export default function App({ navigation }) {
             style={{ flexDirection: 'row' }}>
             <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
             {
-              Temp.length > 0 ? <View style={{ left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center' }}>
-                <Text style={{ color: '#fff', fontSize: 10, fontWeight: 'bold' }}>{Temp.length}</Text>
+              Temp.length > 0 ? <View style={[visible ? styles.numberCart_dim : styles.numberCart]}>
+                <Text style={[{ fontSize: 10, fontWeight: 'bold' }, visible ? { color: '#3c3c3c' } : { color: '#fff' }]}>{Temp.length}</Text>
               </View> : null
             }
           </View>
@@ -197,7 +230,7 @@ export default function App({ navigation }) {
 
       </View>
 
-      <View style={[styles.backgroundBottom, styles.Shadow]} >
+      <View style={[styles.backgroundBottom, styles.Shadow, visible ? { backgroundColor: '#3c3c3c' } : null]} >
         <View style={styles.bottomCheckout}>
           <Text style={{ color: "#2A2D3F", flex: 2 }}>Selected Items</Text>
           <Text style={{
@@ -228,13 +261,74 @@ export default function App({ navigation }) {
           <View
             style={styles.CheckOutButton}>
             <Text style={{ color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 }} onPress={() => {
-              handlnotification()
+              total > 0 ? handlModal() : alert("Please choose to continue")
             }} >Checkout</Text>
           </View>
         </View>
 
       </View>
+      <Modal
+        style={{ borderRadius: 50 }}
+        visible={visible}
+        animationType='fade'
+        onRequestClose={() => console.log('no warning')}
+        transparent>
+        <View style={{ flex: 1, margin: 30, borderRadius: 50 }}>
+          <View style={{
+            flexDirection: 'row', backgroundColor: '#f5f6fa'
+          }}>
+            <GoBackIcon style={{ marginLeft: 20, marginTop: 20, }} onPress={() => handlModal()} />
+            <Text style={styles.titleCheckOut}>Check Out</Text>
+          </View>
+          <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#f5f6fa' }}>
+            <View style={{
+              flex: 1,
+              marginLeft: 25,
+              marginRight: 25,
+            }}>
+              <FlatList
+                style={{ flex: 4 }}
+                nestedScrollEnabled
+                data={listitem}
+                renderItem={renderItemModal}
+                keyExtractor={item => item.id}
+              />
+              <View
+                style={{ borderBottomColor: 'black', borderBottomWidth: 1,marginTop:20 }} />
+              <FlatList
+                style={{ flex: 1 }}
+                nestedScrollEnabled
+                data={listitem}
+                renderItem={renderItemcheckout}
+                keyExtractor={item => item.id}
+              />
+              <View style={{ flex: 0.5 }}>
+                <View style={styles.line}></View>
+                <View style={[styles.bottomCheckout, { marginLeft: 25, marginRight: 25 }]}>
+                  <Text style={{ color: "#2A2D3F", flex: 2 }}>Shipping Fee</Text>
+                  <Text style={{
+                    color: "#F26B6B", flex: 4,
+                    textAlign: 'right'
+                  }}>${ship.toFixed(3)}</Text>
+                </View>
+                <View style={[styles.bottomCheckout, { marginLeft: 25, marginRight: 25 }]}>
+                  <Text style={{ color: "#2A2D3F", flex: 1, fontWeight: 'bold', fontSize: 20 }}>Total money</Text>
+                  <Text style={{
+                    color: "#F26B6B", flex: 1,
+                    fontWeight: '600',
+                    fontSize: 20,
+                    textAlign: 'right'
+                  }}>${totalMoney.toFixed(2)}</Text>
+                </View>
+              </View>
 
+            </View>
+            <TouchableOpacity style={styles.closeButton} onPress={handlModal}>
+              <Text style={{ marginRight: 30, marginLeft: 30, color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 }} >Confirm </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView >
   );
 }
