@@ -37,7 +37,7 @@ import { connect } from 'react-redux'
 
 
 const store = createStore(allReducter);
-function App({ navigation, route }) {
+export default function App({ navigation, route }) {
   const test = [{
     id: 0,
     title: 'Minimal Chair ',
@@ -111,7 +111,17 @@ function App({ navigation, route }) {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={{ fontSize: 15, color: '#2A2D3F', flex: 1 }}>${price.toFixed(2)}</Text>
-          <AddIcon style={{ flex: 1, alignItems: "flex-end" }} />
+          <TouchableOpacity onPress={() => store.dispatch({
+            type: 'ADD_CART',
+            id: id,
+            title: title,
+            price: price,
+            dec: dec,
+            pic: pic,
+          }) & handladd()}>
+            <AddIcon style={{ flex: 1, alignItems: "flex-end" }}></AddIcon>
+          </TouchableOpacity>
+
         </View>
       </TouchableOpacity >
     </View>
@@ -134,6 +144,14 @@ function App({ navigation, route }) {
       setseach(text);
     }
   };
+  const handladd = (c) => {
+    for (var i = 0; i < list_cart.length; i++) {
+      if (list_cart[i].id === c) {
+        return console.log('ton tai')
+      }
+    }
+    return setNum(num + 1);
+  }
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem('list', JSON.stringify(value))
@@ -153,12 +171,12 @@ function App({ navigation, route }) {
     storeData(Temp)
     getData()
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log('Refreshed: '+list_cart.length);
+      console.log('Refreshed: ' + list_cart.length);
       setNum(list_cart.length)
     });
     return unsubscribe;
-  
-  }, [] )
+
+  }, [])
 
   return (
     <View style={{ height: '100%', width: '100%', backgroundColor: '#f5f6fa', }}>
@@ -231,12 +249,6 @@ function App({ navigation, route }) {
   );
 }
 
-const mapStateToProps = state => {
-  return { number: state.counter || 0 }
-};
-
-
-export default connect(mapStateToProps, null)(App);
 
 
 
