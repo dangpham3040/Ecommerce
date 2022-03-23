@@ -25,17 +25,16 @@ import { SliderBox } from "react-native-image-slider-box"
 import LinearGradient from 'react-native-linear-gradient';
 import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
-import *as ACTION from '../../actions';
 import { createStore } from 'redux';
-import *as counter from '../../redux/counter';
+
 
 
 const store = createStore(allReducter);
 const images = [
-  require('../../pic/Minimal_Chair.jpg'),
-  require('../../pic/Elegant_White_Chair.jpg'),
-  require('../../pic/Vintage_Chair.jpg'),
-  require('../../pic/Minimal_Chair1.jpg'),
+  require('../../static/images/Minimal_Chair.jpg'),
+  require('../../static/images/Elegant_White_Chair.jpg'),
+  require('../../static/images/Vintage_Chair.jpg'),
+  require('../../static/images/Minimal_Chair1.jpg'),
 ];
 
 

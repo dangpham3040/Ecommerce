@@ -1,7 +1,4 @@
-// import React, { useEffect, useState } from 'react';
-// const [list,setlist]=useState([]);
-import { ADD, DEL } from '../actions';
-import *as ACTION from '../actions';
+
 import { State } from 'react-native-gesture-handler';
 
 export const NumbersCart = 0;
@@ -70,9 +67,12 @@ export const counterReducer = (state = initProduct, action) => {
                     state.numberCart++;
                 }
             }
-         console.log("cong : "+state.numberCart);
+            console.log("cong : " + state.numberCart);
             return state;
-
+        case 'REMOVE_CART':
+            state.Carts.slice(p, 1);
+            state.numberCart - 1;
+            return state;
         case 'ADD_quantity':
             state.Carts.map((item, key) => {
                 if (item.id == action.id) {

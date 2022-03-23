@@ -29,9 +29,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
 import { createStore } from 'redux';
-import *as ACTION from '../../actions';
-import *as counter from '../../redux/counter';
-import { connect } from 'react-redux'
+
 
 const store = createStore(allReducter);
 
@@ -42,6 +40,7 @@ export default function App({ navigation }) {
   const [ship, setShip] = useState(30);
   const [totalMoney, settotalMoney] = useState(0);
   const [visible, setvisible] = useState(false);
+  const [num, setNum] = useState(0);
 
   const dispatch = useDispatch();
   const list = useSelector(state => state.Carts);
@@ -170,13 +169,50 @@ export default function App({ navigation }) {
       settotalMoney(total + ship);
     }
   }
-  const handlnotification = () => {
+  const handlnotification = (i) => {
+    var id = "";
+    var title = "";
+    var price = "";
+    var dec = "";
+    var pic = "";
+    var check = "";
+    var quantity = "";
+
+    list.map((item, key) => {
+      if (item.id === i) {
+        id = item.id;
+        title = item.title;
+        price = item.price;
+        dec = item.dec;
+        pic = item.pic;
+        check = item.check;
+        quantity = item.quantity;
+      }
+    });
     Alert.alert(
-      'Please choose to continue',
+      "Please choose to continue",
+      "are u sure u want to remove this",
       [
-        { text: 'Yes', onPress: () => console.log('Yes Pressed'), style: 'cancel' },
-      ],
-      { cancelable: true }
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK", onPress: () =>
+            store.dispatch({
+              type: 'REMOVE_CART',
+              id: id + "",
+              title: title,
+              price: price,
+              dec: dec,
+              pic: pic,
+              check: check,
+              quantity: quantity,
+            }
+            )
+        }
+      ]
     );
   };
   const storeData = async (data) => {
@@ -189,7 +225,7 @@ export default function App({ navigation }) {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('list')
-      return value != null ? setlistitem(JSON.parse(value)) : null
+      return value != null ? setlistitem(JSON.parse(value)) & setNum(count) : null
     } catch (e) {
       console.log(e);
     }
@@ -215,8 +251,8 @@ export default function App({ navigation }) {
             style={{ flexDirection: 'row' }}>
             <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
             {
-              Temp.length > 0 ? <View style={[visible ? styles.numberCart_dim : styles.numberCart]}>
-                <Text style={[{ fontSize: 10, fontWeight: 'bold' }, visible ? { color: '#3c3c3c' } : { color: '#fff' }]}>{Temp.length}</Text>
+              num > 0 ? <View style={[visible ? styles.numberCart_dim : styles.numberCart]}>
+                <Text style={[{ fontSize: 10, fontWeight: 'bold' }, visible ? { color: '#3c3c3c' } : { color: '#fff' }]}>{num}</Text>
               </View> : null
             }
           </View>
@@ -294,7 +330,7 @@ export default function App({ navigation }) {
                 keyExtractor={item => item.id}
               />
               <View
-                style={{ borderBottomColor: 'black', borderBottomWidth: 1,marginTop:20 }} />
+                style={{ borderBottomColor: 'black', borderBottomWidth: 1, marginTop: 20 }} />
               <FlatList
                 style={{ flex: 1 }}
                 nestedScrollEnabled
