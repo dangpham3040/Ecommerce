@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
+
 import allReducter from './app/redux/counter';
 const store = createStore(allReducter, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 // const store = createStore(allReducter);
@@ -31,6 +32,7 @@ export default function App() {
           <Stack.Screen name="HomePage" component={HomePage} options={{ headerShown: false }} />
           <Stack.Screen name="DetaiPage" component={DetaiPage} options={{ headerShown: false }} />
           <Stack.Screen name="CartPage" component={CartPage} options={{ headerShown: false }} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

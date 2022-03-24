@@ -1,8 +1,8 @@
 
 import { State } from 'react-native-gesture-handler';
 
-export const NumbersCart = 0;
 const initProduct = {
+    name: '',
     numberCart: 0,
     Carts: [],
     _products: [
@@ -103,8 +103,12 @@ export const counterReducer = (state = initProduct, action) => {
             return {
                 ...state
             }
+        case 'SET_name':
+            state.name = action.name;
+            return state;
         default:
             return state;
+
     }
 }
 export default counterReducer;

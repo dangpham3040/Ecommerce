@@ -29,6 +29,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
 import { createStore } from 'redux';
+import Header from '../../components/header';
 
 
 const store = createStore(allReducter);
@@ -215,6 +216,12 @@ export default function App({ navigation }) {
       ]
     );
   };
+  const setname = () => {
+    store.dispatch({
+      type: 'SET_name',
+      name: 'Cart',
+    })
+  }
   const storeData = async (data) => {
     try {
       await AsyncStorage.setItem('list', JSON.stringify(data))
@@ -235,6 +242,7 @@ export default function App({ navigation }) {
     storeData(list)
     getData()
     handltotal()
+    setname()
   }, [])
 
   return (
@@ -242,30 +250,14 @@ export default function App({ navigation }) {
     <SafeAreaView style={[styles.container, visible ? { backgroundColor: '#3c3c3c' } : null]}>
       <StatusBar hidden />
       <View style={{ flex: 2, }}>
-        <View>
-        </View>
-        <View style={styles.header}>
-          <GoBackIcon onPress={() => navigation.goBack()} />
-          <Text style={styles._title}>Cart</Text>
-          <View
-            style={{ flexDirection: 'row' }}>
-            <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
-            {
-              num > 0 ? <View style={[visible ? styles.numberCart_dim : styles.numberCart]}>
-                <Text style={[{ fontSize: 10, fontWeight: 'bold' }, visible ? { color: '#3c3c3c' } : { color: '#fff' }]}>{num}</Text>
-              </View> : null
-            }
-          </View>
-        </View>
+        <Header />
         <FlatList
           nestedScrollEnabled
           data={listitem}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
-
       </View>
-
       <View style={[styles.backgroundBottom, styles.Shadow, visible ? { backgroundColor: '#3c3c3c' } : null]} >
         <View style={styles.bottomCheckout}>
           <Text style={{ color: "#2A2D3F", flex: 2 }}>Selected Items</Text>

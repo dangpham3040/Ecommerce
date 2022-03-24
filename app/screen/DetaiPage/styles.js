@@ -1,17 +1,15 @@
 import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   header: {
+    paddingHorizontal: 40,
+    paddingVertical: 20,
     marginTop: 20,
-    backgroundColor: '#dddde8',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 1,
-    paddingBottom: 45,
-    alignItems: 'flex-start',
     flexWrap: 'wrap',
     direction: 'inherit',
-    height: '100%',
-    width: '100%',
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    paddingHorizontal: 25,
+    alignItems: 'center'
   },
   headericon: {
     marginTop: 20,
@@ -25,7 +23,7 @@ export const styles = StyleSheet.create({
     direction: 'inherit',
     height: '100%',
     width: '100%',
-    
+
   },
   container: {
     backgroundColor: '#f5f6fa',
@@ -99,7 +97,7 @@ export const styles = StyleSheet.create({
   checkoutBottom:
   {
     backgroundColor: '#f5f6fa',
-    marginTop: 20,
+    marginTop: 30,
     marginLeft: 20,
     flexDirection: 'column',
     alignContent: 'space-between',
@@ -129,7 +127,7 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
     flex: 1,
     position: 'absolute',
-    bottom: 0,
+    bottom: -30,
     right: 20,
 
     borderRadius: 50,
@@ -157,6 +155,20 @@ export const styles = StyleSheet.create({
   },
   price: {
     flex: 1, justifyContent: 'center', color: "#F26B6B", fontSize: 25, fontWeight: 'bold', lineHeight: 25, fontFamily: 'Poppins'
+  },
+  SliderBox: {
+    height: "100%",
+    width: "100%",
+    borderBottomLeftRadius: 80,
+    borderBottomRightRadius: 80,
+    paddingBottom: 40,
+  },
+  LinearGradient: {
+    height: "25%", width: "100%",
+    position: "absolute",
+    top: 410,
+    bottom: 0,
+    opacity: 0.49,
   }
 
 });

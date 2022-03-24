@@ -26,7 +26,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
 import { createStore } from 'redux';
-
+import Header from '../../components/header';
 
 
 const store = createStore(allReducter);
@@ -49,10 +49,20 @@ export default function App({ navigation, route }) {
         return console.log('ton tai')
       }
     }
-    return setNum(num+1);
+    return setNum(num+1)
+  }
+  const setname = () => {
+    store.dispatch({
+      type: 'SET_name',
+      name: 'Product',
+    })
+  }
+  const parentToChild = (so) => {
+    setNum(so);
   }
   useEffect(() => {
     setNum(list_cart.length)
+    setname()
   })
   return (
     <SafeAreaView style={styles.container}>
@@ -62,32 +72,12 @@ export default function App({ navigation, route }) {
         flexDirection: 'column',
         height: "100%",
         width: "100%",
+        marginBottom: 10
       }}>
         <View style={styles.headericon}>
-          <View style={{ flexDirection: 'row', justifyContent: "space-between", paddingHorizontal: 25, backgroundColor: '#fff', alignItems: 'center' }}>
-            <GoBackIcon onPress={() => navigation.navigate('HomePage')} />
-            <Text style={styles.titleProduct}>Product</Text>
-            <View style={{ flexDirection: 'row' }}>
-              <View
-                style={{ flexDirection: 'row' }}>
-                <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
-                {
-                  list_cart.length > 0 ?
-                    <View style={{ left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center' }}>
-                      <Text style={{ color: '#fff', fontSize: 10, fontWeight: 'bold' }}>{list_cart.length}</Text>
-                    </View> : null
-                }
-              </View>
-            </View>
-          </View>
+          <Header  parentToChild={num}/>
           <SliderBox
-            style={{
-              height: "100%",
-              width: "100%",
-              borderBottomLeftRadius: 80,
-              borderBottomRightRadius: 80,
-              paddingBottom: 40,
-            }}
+            style={styles.SliderBox}
             images={images}
             sliderBoxHeight={500}
             onCurrentImagePressed={index => console.log(`image ${index} pressed`)}
@@ -95,24 +85,7 @@ export default function App({ navigation, route }) {
             inactiveDotColor="#90A4AE"
             dotStyle={styles.dot}
           />
-          <LinearGradient style={{
-            height: "25%", width: "100%",
-            position: "absolute",
-            bottom: 0,
-            opacity: 0.49,
-          }} colors={['rgba(255, 255, 255, 1)', 'rgba(0, 0, 0, 1)']} deg={180} />
-          {/* <ImageBackground style={styles.header} source={require('../../pic/Minimal_Chair.png')} >
-            <View style={{ flexDirection: 'row', justifyContent: "space-between" ,paddingHorizontal: 25,}}>
-              <GoBackIcon style={{ flex: 1 }} onPress={() => navigation.navigate('HomePage')} />
-              <Text style={styles.titleProduct}>Product</Text>
-              <ShoppingCartsIcon style={{ flex: 1 }} />
-            </View>
-            <LinearGradient style={{
-              height: "25%", width: "100%",
-              position: "absolute",
-              bottom: 0,
-            }} colors={['transparent', '#171921',]}/>
-          </ImageBackground> */}
+          <LinearGradient style={styles.LinearGradient} colors={['rgba(255, 255, 255, 1)', 'rgba(0, 0, 0, 1)']} deg={180} />
         </View>
         <HeartLikeIcon style={styles.HeartLike} />
 

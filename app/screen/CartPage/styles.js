@@ -1,14 +1,17 @@
 import { StyleSheet } from "react-native";
+
 export const styles = StyleSheet.create({
   header: {
-    marginTop: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-    paddingBottom: 50,
-    top: 20,
-
+    flexDirection: 'row', justifyContent: "space-between", paddingHorizontal: 40, alignItems: 'center',
+    paddingHorizontal: 40,
+    paddingVertical: 20,
+    flex: 1,
+    paddingBottom: 45,
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+    direction: 'inherit',
+    height: '100%',
+    width: '100%',
   },
   container: {
     flex: 1,
