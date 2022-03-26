@@ -25,7 +25,7 @@ import GotoIcon from '../../icons/GotoIcon/GotoIcon'
 
 
 export default function App({ list }) {
-
+    const [filteredDataSource, setFilteredDataSource] = useState([]);
     const ItemBottom = ({ title, dec, price, pic, id }) => (
         <TouchableOpacity style={[styles.itemBottom, styles.ShadowItem]} onPress={() =>
             navigation.navigate('DetaiPage', {
@@ -52,12 +52,15 @@ export default function App({ list }) {
     const renderItemBottom = ({ item }) => (
         <ItemBottom title={item.title} dec={item.dec} price={item.price} id={item.id} pic={item.pic} item={item} />
     );
-
+    useEffect(() => {
+        setFilteredDataSource(list)
+   
+    }, [])
     return (
         <FlatList
             numColumns={1}
             style={{ marginTop: 20, flex: 1 }}
-            data={list}
+            data={filteredDataSource}
             renderItem={renderItemBottom}
             keyExtractor={item => item.id}
         />
