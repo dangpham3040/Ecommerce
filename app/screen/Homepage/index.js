@@ -32,7 +32,7 @@ import { Keyboard } from 'react-native'
 import allReducter from '../../redux';
 import { createStore } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { connect } from 'react-redux'
+import list_item from'../../components/listitem';
 
 
 
@@ -234,14 +234,7 @@ export default function App({ navigation, route }) {
             :
             <View style={[{ flex: 2, marginTop: 20 }, styles.margin_layout]}>
               <Text style={styles.titleItem}>Seach result</Text>
-              <FlatList
-                numColumns={1}
-                style={{ marginTop: 20, flex: 1 }}
-                data={filteredDataSource}
-                renderItem={renderItemBottom}
-                keyExtractor={item => item.id}
-
-              />
+              <list_item list={{ listitem }} />
             </View>
         }
       </SafeAreaView>

@@ -30,7 +30,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
 import { createStore } from 'redux';
 import Header from '../../components/header';
-
+import list_item from'../../components/listitem';
 
 const store = createStore(allReducter);
 
@@ -286,12 +286,13 @@ export default function App({ navigation }) {
 
         </View>
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-          <View
-            style={styles.CheckOutButton}>
-            <Text style={{ color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 }} onPress={() => {
+
+          <TouchableOpacity
+            style={styles.CheckOutButton} onPress={() => {
               total > 0 ? handlModal() : alert("Please choose to continue")
-            }} >Checkout</Text>
-          </View>
+            }}>
+            <Text style={styles.title_checkout}  >Checkout</Text>
+          </TouchableOpacity>
         </View>
 
       </View>
@@ -321,6 +322,8 @@ export default function App({ navigation }) {
                 renderItem={renderItemModal}
                 keyExtractor={item => item.id}
               />
+             
+            
               <View
                 style={{ borderBottomColor: 'black', borderBottomWidth: 1, marginTop: 20 }} />
               <FlatList

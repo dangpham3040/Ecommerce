@@ -13,6 +13,7 @@ import {
   Text,
   View,
   ImageBackground,
+  TouchableOpacity
 } from 'react-native';
 import { styles } from './styles';
 
@@ -21,12 +22,13 @@ import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import HeartLikeIcon from '../../icons/HeartLikeIcon/HeartLikeIcon';
 import RatingStar from '../../icons/RatingStar/RatingStar';
 import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
-import { SliderBox } from "react-native-image-slider-box"
+import  SliderBox from "../../components/sliderbox"
 import LinearGradient from 'react-native-linear-gradient';
 import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
 import { createStore } from 'redux';
 import Header from '../../components/header';
+
 
 
 const store = createStore(allReducter);
@@ -49,7 +51,7 @@ export default function App({ navigation, route }) {
         return console.log('ton tai')
       }
     }
-    return setNum(num+1)
+    return setNum(num + 1)
   }
   const setname = () => {
     store.dispatch({
@@ -57,9 +59,7 @@ export default function App({ navigation, route }) {
       name: 'Product',
     })
   }
-  const parentToChild = (so) => {
-    setNum(so);
-  }
+
   useEffect(() => {
     setNum(list_cart.length)
     setname()
@@ -75,16 +75,8 @@ export default function App({ navigation, route }) {
         marginBottom: 10
       }}>
         <View style={styles.headericon}>
-          <Header  parentToChild={num}/>
-          <SliderBox
-            style={styles.SliderBox}
-            images={images}
-            sliderBoxHeight={500}
-            onCurrentImagePressed={index => console.log(`image ${index} pressed`)}
-            dotColor="#2A2D3F"
-            inactiveDotColor="#90A4AE"
-            dotStyle={styles.dot}
-          />
+          <Header parentToChild={num} />
+          <SliderBox />
           <LinearGradient style={styles.LinearGradient} colors={['rgba(255, 255, 255, 1)', 'rgba(0, 0, 0, 1)']} deg={180} />
         </View>
         <HeartLikeIcon style={styles.HeartLike} />
@@ -105,17 +97,17 @@ export default function App({ navigation, route }) {
             unt ut{"\n"}
             laoreet dolore magna.</Text>
         </View>
-        <View style={styles.AddCartIcon} >
-          <Text style={{ color: '#fff', fontSize: 20 }} onPress={() => store.dispatch({
-            type: 'ADD_CART',
-            id: route.params.id,
-            title: route.params.title,
-            price: route.params.price,
-            dec: route.params.dec,
-            pic: route.params.pic
-          }
-          ) & handladd()} > +  Add to Cart </Text>
-        </View>
+        <TouchableOpacity style={styles.AddCartIcon} onPress={() => store.dispatch({
+          type: 'ADD_CART',
+          id: route.params.id,
+          title: route.params.title,
+          price: route.params.price,
+          dec: route.params.dec,
+          pic: route.params.pic
+        }) & handladd()}>
+          <Text style={{ color: '#fff', fontSize: 20 }} > +  Add to Cart </Text>
+        </TouchableOpacity>
+
       </View>
     </SafeAreaView >
   );

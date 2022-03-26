@@ -269,6 +269,9 @@ export const styles = StyleSheet.create({
   numberCart_dim:
   {
     left: 27, position: 'absolute', top: 7, backgroundColor: '#3c3c3c', borderRadius: 50, height: 15, width: 15, alignItems: 'center'
+  },
+  title_checkout:{
+    color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 
   }
 });
 
