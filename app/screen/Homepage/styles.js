@@ -150,7 +150,7 @@ export const styles = StyleSheet.create({
     },
     list_bottom:
     {
-     
+
         flex: 1.75,
         width: '85%',
         height: '15%',
@@ -164,14 +164,21 @@ export const styles = StyleSheet.create({
         marginRight: 25,
     },
     ShadowItem: {
-        shadowColor:"#e3e5ea",
+        shadowColor: "#e3e5ea",
         shadowOffset: {
             width: 0,
             height: 10,
         },
         shadowOpacity: 0.51,
         shadowRadius: 13.16,
-        
+
         elevation: 20,
+    },
+    numberCart:
+    {
+        left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center'
+    },
+    title_num:{
+        color: '#fff', fontSize: 10, fontWeight: 'bold' 
     }
 });

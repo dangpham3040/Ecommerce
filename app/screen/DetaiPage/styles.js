@@ -141,14 +141,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 2,
   },
-  dot: {
-    width: 7,
-    height: 7,
-    borderRadius: 15,
-    marginHorizontal: 10,
-    padding: 0,
-    margin: 0,
-  },
+
   describe: {
     width: 350, fontWeight: '400', color: "#B8B8CD", top: 10, right: 20, fontFamily: 'PoppinsVN-400', fontSize: 15, left: 5
     ,
@@ -156,13 +149,7 @@ export const styles = StyleSheet.create({
   price: {
     flex: 1, justifyContent: 'center', color: "#F26B6B", fontSize: 25, fontWeight: 'bold', lineHeight: 25, fontFamily: 'Poppins'
   },
-  SliderBox: {
-    height: "100%",
-    width: "100%",
-    borderBottomLeftRadius: 80,
-    borderBottomRightRadius: 80,
-    paddingBottom: 40,
-  },
+
   LinearGradient: {
     height: "25%", width: "100%",
     position: "absolute",

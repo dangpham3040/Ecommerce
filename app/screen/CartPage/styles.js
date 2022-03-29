@@ -270,8 +270,34 @@ export const styles = StyleSheet.create({
   {
     left: 27, position: 'absolute', top: 7, backgroundColor: '#3c3c3c', borderRadius: 50, height: 15, width: 15, alignItems: 'center'
   },
-  title_checkout:{
-    color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 
+  title_checkout: {
+    color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20
+  },
+  total:
+  {
+    color: "#F26B6B", flex: 4,
+    textAlign: 'right'
+  },
+  ship: {
+    color: "#F26B6B", flex: 4,
+    textAlign: 'right'
+  },
+  totalMoney: {
+    color: "#F26B6B", flex: 3.5,
+    fontWeight: '600',
+    fontSize: 20,
+    textAlign: 'right'
+  },
+  Confirm:
+  {
+    marginRight: 30, marginLeft: 30, color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20
+  },
+  Subtotal: {
+
+    color: "#2A2D3F", flex: 2, fontWeight: 'bold', fontSize: 20
+  },
+  Shipping_Fee: {
+    color: "#2A2D3F", flex: 2
   }
 });
 

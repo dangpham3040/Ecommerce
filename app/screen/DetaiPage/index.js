@@ -17,8 +17,6 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 
-import GoBackIcon from '../../icons/GoBackIcon/GoBackIcon'
-import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import HeartLikeIcon from '../../icons/HeartLikeIcon/HeartLikeIcon';
 import RatingStar from '../../icons/RatingStar/RatingStar';
 import ColerPickerIcon from '../../icons/ColerPickerIcon/ColerPickerIcon';
@@ -38,8 +36,6 @@ const images = [
   require('../../static/images/Vintage_Chair.jpg'),
   require('../../static/images/Minimal_Chair1.jpg'),
 ];
-
-
 export default function App({ navigation, route }) {
   const dispatch = useDispatch();
   const [num, setNum] = useState(0);
@@ -62,7 +58,10 @@ export default function App({ navigation, route }) {
 
   useEffect(() => {
     setNum(list_cart.length)
-    setname()
+    const unsubscribe = navigation.addListener('focus', () => {
+          setname()
+    });
+    return unsubscribe;
   })
   return (
     <SafeAreaView style={styles.container}>

@@ -200,7 +200,7 @@ export default function App({ navigation, route }) {
           <View style={{ marginTop: 50, flexDirection: 'row' }}>
             <ShoppingCartsIcon style={{ marginTop: 10 }} onPress={() => navigation.navigate('CartPage')} />
             {
-              list_cart.length > 0 ? <View style={{ left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center' }}>
+              list_cart.length > 0 ? <View style={styles.numberCart}>
                 <Text style={{ color: '#fff', fontSize: 10, fontWeight: 'bold' }}>{list_cart.length}</Text>
               </View> : null
             }
