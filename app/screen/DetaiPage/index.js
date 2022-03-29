@@ -65,14 +65,7 @@ export default function App({ navigation, route }) {
   })
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{
-        flex: 3,
-        backgroundColor: '#fff',
-        flexDirection: 'column',
-        height: "100%",
-        width: "100%",
-        marginBottom: 10
-      }}>
+      <View style={styles.view_header}>
         <View style={styles.headericon}>
           <Header parentToChild={num} />
           <SliderBox />
@@ -84,12 +77,12 @@ export default function App({ navigation, route }) {
       <View style={styles.checkoutBottom} >
         <View style={{ flexDirection: 'row', height: 20 }}>
           <Text style={styles.price}>${route.params.price.toFixed(2)}</Text>
-          <RatingStar style={{ flex: 1, marginTop: 20, marginRight: 30, marginBottom: 20, }} />
+          <RatingStar style={styles.ratingStar} />
         </View>
         <Text style={styles.title}>{route.params.title}</Text>
         <ColerPickerIcon />
-        <View style={{ top: 20 }}>
-          <Text style={{ fontWeight: '500', }}>Description</Text>
+        <View style={styles.view_describe}>
+          <Text style={styles.title_describe}>Description</Text>
           <Text style={styles.describe}>
             Lorem ipsum dolor sit amet, consectetuer adipis
             cing elit, sed diam nonummy nibh euismod tincid{"\n"}

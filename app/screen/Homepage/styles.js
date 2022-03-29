@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         flex: 1,
         flexDirection: 'column',
-
+        backgroundColor: '#f5f6fa',
     },
 
     title: {
@@ -104,9 +104,7 @@ export const styles = StyleSheet.create({
     },
     price:
     {
-        fontSize: 15,
-        color: "#2A2D3F",
-        flex: 2,
+        fontSize: 15, color: '#2A2D3F', flex: 1
     },
     imageBottom: {
 
@@ -140,23 +138,23 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     titleItem: {
+
         marginTop: 50,
         fontWeight: 'bold',
         fontSize: 30,
         marginTop: 20,
         marginBottom: 10,
         color: "#2A2D3F",
-
+ 
     },
     list_bottom:
     {
-
         flex: 1.75,
         width: '85%',
         height: '15%',
         left: 25,
         right: 25,
-        top: 20,
+
     },
 
     margin_layout: {
@@ -178,7 +176,29 @@ export const styles = StyleSheet.create({
     {
         left: 27, position: 'absolute', top: 7, backgroundColor: '#e65c51', borderRadius: 50, height: 15, width: 15, alignItems: 'center'
     },
-    title_num:{
-        color: '#fff', fontSize: 10, fontWeight: 'bold' 
+    title_num: {
+        color: '#fff', fontSize: 10, fontWeight: 'bold'
+    },
+    view_top:
+    {
+        flexDirection: "row", marginLeft: 25,
+        marginRight: 25,
+    },
+    shop_cart: {
+        marginTop: 50, flexDirection: 'row'
+    },
+    Heart:
+    {
+        flex: 1,
+        top: 5,
+        right: 5,
+    },
+    item_body:
+    {
+        marginBottom: 20, marginTop: 20, alignSelf: 'flex-start'
+    },
+    addicon:
+    {
+        flex: 1, alignItems: "flex-end"
     }
 });

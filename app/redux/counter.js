@@ -1,6 +1,4 @@
 
-import { State } from 'react-native-gesture-handler';
-
 const initProduct = {
     name: '',
     numberCart: 0,
@@ -40,11 +38,6 @@ class product {
         this.check = "false";
         this.quantity = 1;
     }
-}
-function cartExists(id) {
-    return Carts.some(function (el) {
-        return el.id === id;
-    });
 }
 export const counterReducer = (state = initProduct, action) => {
     const p = new product(action.id, action.title, action.price, action.dec, action.pic);

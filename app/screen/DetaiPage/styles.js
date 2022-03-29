@@ -156,6 +156,28 @@ export const styles = StyleSheet.create({
     top: 410,
     bottom: 0,
     opacity: 0.49,
-  }
+  },
+  view_header:
+  {
+    flex: 3,
+    backgroundColor: '#fff',
+    flexDirection: 'column',
+    height: "100%",
+    width: "100%",
+    marginBottom: 10
+  },
+  ratingStar:
+  {
+    flex: 1, marginTop: 20, marginRight: 30, marginBottom: 20,
+  },
+  view_describe:
+  {
+    top: 20
+  },
+  title_describe:
+  {
+    fontWeight: '500',
+  },
+
 
 });

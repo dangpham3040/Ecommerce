@@ -21,7 +21,6 @@ import {
   TouchableOpacity
 } from 'react-native';
 import GoBackIcon from '../../icons/GoBackIcon/GoBackIcon'
-import ShoppingCartsIcon from '../../icons/ShoppingCartsIcon/ShoppingCartsIcon'
 import { styles } from './styles';
 import UnCheck from '../../icons/UnCheck/UnCheck';
 import CheckedIcon from '../../icons/CheckedIcon/CheckedIcon';
@@ -30,7 +29,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import allReducter from '../../redux';
 import { createStore } from 'redux';
 import Header from '../../components/header';
-import list_item from'../../components/listitem';
+import { s } from '../../utils/styles'
+
 
 const store = createStore(allReducter);
 
@@ -47,52 +47,45 @@ export default function App({ navigation }) {
   const list = useSelector(state => state.Carts);
   const count = useSelector(state => state.numberCart);
   const Temp = list;
-  console.log("\n\n**************************");
-  console.log("so luong : " + Temp.length);
   const Item = ({ title, price, pic, check, quantity, id }) => (
     <View style={[visible ? styles.item_dim : styles.item]}>
-      <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center' }}>
         {
-          check === "true" ? <CheckedIcon style={{ marginRight: 15 }} onPress={() => handleCheck(id)} /> : <UnCheck style={{ marginRight: 15 }} onPress={() => handleCheck(id)} />
+          check === "true" ? <CheckedIcon style={styles.check} onPress={() => handleCheck(id)} /> : <UnCheck style={styles.check} onPress={() => handleCheck(id)} />
         }
-        <Image source={{ uri: pic }} style={{ flex: 1, height: 70, width: 70, marginRight: 15, borderRadius: 20 }} />
-        <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
+        <Image source={{ uri: pic }} style={styles.Image} />
+        <View style={styles.view_item}>
           <Text style={styles.title}>{title}</Text>
-          <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
-            <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
+          <View style={styles.item_body}>
+            <Text style={styles.item_price}>${price.toFixed(2)}</Text>
             <View style={styles.add_del}>
               <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <Text onPress={(() => handladd(id))}>+</Text>
-                <Text style={{ marginLeft: 5, marginRight: 5 }}>{quantity}</Text>
+                <Text style={styles.item_quantity}>{quantity}</Text>
                 <Text onPress={() => handldel(id)}>-</Text>
               </View>
             </View>
           </View>
-        </View>
+ 
       </View>
     </View >);
   const ItemModal = ({ title, price, pic, check, quantity, id }) => (
     check === "true" ?
       <View style={styles.itemModal}>
-        <View style={{ flex: 4, flexDirection: 'row', alignItems: 'center' }}>
-          <Image source={{ uri: pic }} style={{ flex: 1, height: 70, width: 70, borderRadius: 20 }} />
-          <View style={{ flex: 2, flexDirection: 'column', marginLeft: 15, justifyContent: 'center' }}>
+          <Image source={{ uri: pic }} style={styles.Image} />
+          <View style={styles.view_item}>
             <Text style={styles.title}>{title}</Text>
-            <View style={{ flexDirection: 'row', alignContent: 'space-between', top: 15 }}>
-              <Text style={{ flex: 1, color: "#F26B6B", fontSize: 15, fontWeight: '400' }}>${price.toFixed(2)}</Text>
-              <Text style={{ marginLeft: 5, marginRight: 5 }}>{quantity}</Text>
+            <View style={styles.item_body}>
+              <Text style={styles.item_price}>${price.toFixed(2)}</Text>
+              <Text style={styles.item_quantity}>{quantity}</Text>
             </View>
-          </View>
         </View>
       </View > : null);
   const Itemcheckout = ({ title, price, pic, check, quantity, id }) => (
     check === "true" ?
       <View style={[styles.itemModal]}>
-        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Text style={[styles.title, { textAlign: 'left', flex: 2 }]}>{title}</Text>
-          <Text style={{ textAlign: 'center', flex: 2, color: "#F26B6B", fontSize: 15, fontWeight: '400', marginTop: 10 }}>${price.toFixed(2)}</Text>
-          <Text style={{ flex: 1, marginLeft: 5, marginRight: 5, marginTop: 10, textAlign: 'right' }}>{quantity}</Text>
-        </View>
+        <Text style={[styles.title, { textAlign: 'left', flex: 2 }]}>{title}</Text>
+        <Text style={[styles.item_price,{marginTop:10}]}>${price.toFixed(2)}</Text>
+        <Text style={styles.checkout_quantity}>{quantity}</Text>
       </View > : null);
   const renderItem = ({ item }) => (
     <Item title={item.title} price={item.price} pic={item.pic} id={item.id} check={item.check} quantity={item.quantity} />
@@ -170,52 +163,6 @@ export default function App({ navigation }) {
       settotalMoney(total + ship);
     }
   }
-  const handlnotification = (i) => {
-    var id = "";
-    var title = "";
-    var price = "";
-    var dec = "";
-    var pic = "";
-    var check = "";
-    var quantity = "";
-
-    list.map((item, key) => {
-      if (item.id === i) {
-        id = item.id;
-        title = item.title;
-        price = item.price;
-        dec = item.dec;
-        pic = item.pic;
-        check = item.check;
-        quantity = item.quantity;
-      }
-    });
-    Alert.alert(
-      "Please choose to continue",
-      "are u sure u want to remove this",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        {
-          text: "OK", onPress: () =>
-            store.dispatch({
-              type: 'REMOVE_CART',
-              id: id + "",
-              title: title,
-              price: price,
-              dec: dec,
-              pic: pic,
-              check: check,
-              quantity: quantity,
-            }
-            )
-        }
-      ]
-    );
-  };
   const setname = () => {
     store.dispatch({
       type: 'SET_name',
@@ -247,9 +194,9 @@ export default function App({ navigation }) {
 
   return (
 
-    <SafeAreaView style={[styles.container, visible ? { backgroundColor: '#3c3c3c' } : null]}>
+    <SafeAreaView style={[styles.container, visible ? styles.blur : null]}>
       <StatusBar hidden />
-      <View style={{ flex: 2, }}>
+      <View style={styles.top}>
         <Header />
         <FlatList
           nestedScrollEnabled
@@ -258,34 +205,23 @@ export default function App({ navigation }) {
           keyExtractor={item => item.id}
         />
       </View>
-      <View style={[styles.backgroundBottom, styles.Shadow, visible ? { backgroundColor: '#3c3c3c' } : null]} >
+      <View style={[styles.backgroundBottom, styles.Shadow, visible ? styles.blur : null]} >
         <View style={styles.bottomCheckout}>
-          <Text style={{ color: "#2A2D3F", flex: 2 }}>Selected Items</Text>
-          <Text style={{
-            color: "#F26B6B", flex: 4,
-            textAlign: 'right'
-          }}>${total.toFixed(2)}</Text>
+          <Text style={styles.title_mony}>Selected Items</Text>
+          <Text style={styles.total}>${total.toFixed(2)}</Text>
         </View>
         <View style={styles.bottomCheckout}>
-          <Text style={{ color: "#2A2D3F", flex: 2 }}>Shipping Fee</Text>
-          <Text style={{
-            color: "#F26B6B", flex: 4,
-            textAlign: 'right'
-          }}>${ship.toFixed(3)}</Text>
+          <Text style={styles.title_mony}>Shipping Fee</Text>
+          <Text style={styles.ship}>${ship.toFixed(3)}</Text>
         </View>
 
         <View style={styles.line} />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', left: 30, bottom: 150 }}>
-          <Text style={{ color: "#2A2D3F", flex: 2, fontWeight: 'bold', fontSize: 20 }}>Subtotal</Text>
-          <Text style={{
-            color: "#F26B6B", flex: 3.5,
-            fontWeight: '600',
-            fontSize: 20,
-            textAlign: 'right'
-          }}>${totalMoney.toFixed(2)}</Text>
+        <View style={styles.view_Subtotal}>
+          <Text style={styles.Subtotal}>Subtotal</Text>
+          <Text style={styles.totalMoney}>${totalMoney.toFixed(2)}</Text>
 
         </View>
-        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+        <View style={styles.view_checkout}>
 
           <TouchableOpacity
             style={styles.CheckOutButton} onPress={() => {
@@ -297,37 +233,26 @@ export default function App({ navigation }) {
 
       </View>
       <Modal
-        style={{ borderRadius: 50 }}
         visible={visible}
         animationType='fade'
         onRequestClose={() => console.log('no warning')}
         transparent>
-        <View style={{ flex: 1, margin: 30, borderRadius: 50 }}>
-          <View style={{
-            flexDirection: 'row', backgroundColor: '#f5f6fa'
-          }}>
-            <GoBackIcon style={{ marginLeft: 20, marginTop: 20, }} onPress={() => handlModal()} />
+        <View style={styles.modal_view}>
+          <View style={styles.modal_header}>
+            <GoBackIcon style={styles.modal_goback} onPress={() => handlModal()} />
             <Text style={styles.titleCheckOut}>Check Out</Text>
           </View>
-          <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#f5f6fa' }}>
-            <View style={{
-              flex: 1,
-              marginLeft: 25,
-              marginRight: 25,
-            }}>
+          <View style={styles.modal_body}>
+            <View style={styles.flatList_top}>
               <FlatList
-                style={{ flex: 4 }}
                 nestedScrollEnabled
                 data={listitem}
                 renderItem={renderItemModal}
                 keyExtractor={item => item.id}
               />
-             
-            
               <View
-                style={{ borderBottomColor: 'black', borderBottomWidth: 1, marginTop: 20 }} />
+                style={styles.flatList_bottom} />
               <FlatList
-                style={{ flex: 1 }}
                 nestedScrollEnabled
                 data={listitem}
                 renderItem={renderItemcheckout}
@@ -335,27 +260,18 @@ export default function App({ navigation }) {
               />
               <View style={{ flex: 0.5 }}>
                 <View style={styles.line}></View>
-                <View style={[styles.bottomCheckout, { marginLeft: 25, marginRight: 25 }]}>
-                  <Text style={{ color: "#2A2D3F", flex: 2 }}>Shipping Fee</Text>
-                  <Text style={{
-                    color: "#F26B6B", flex: 4,
-                    textAlign: 'right'
-                  }}>${ship.toFixed(3)}</Text>
+                <View style={[styles.bottomCheckout]}>
+                  <Text style={styles.Shipping_Fee}>Shipping Fee</Text>
+                  <Text style={styles.ship}>${ship.toFixed(3)}</Text>
                 </View>
-                <View style={[styles.bottomCheckout, { marginLeft: 25, marginRight: 25 }]}>
-                  <Text style={{ color: "#2A2D3F", flex: 1, fontWeight: 'bold', fontSize: 20 }}>Total money</Text>
-                  <Text style={{
-                    color: "#F26B6B", flex: 1,
-                    fontWeight: '600',
-                    fontSize: 20,
-                    textAlign: 'right'
-                  }}>${totalMoney.toFixed(2)}</Text>
+                <View style={[styles.bottomCheckout]}>
+                  <Text style={styles.modal_title}>Total money</Text>
+                  <Text style={styles.modal_totalmoney}>${totalMoney.toFixed(2)}</Text>
                 </View>
               </View>
-
             </View>
             <TouchableOpacity style={styles.closeButton} onPress={handlModal}>
-              <Text style={{ marginRight: 30, marginLeft: 30, color: '#fff', fontWeight: 'bold', fontWeight: '500', fontSize: 20 }} >Confirm </Text>
+              <Text style={styles.Confirm} >Confirm </Text>
             </TouchableOpacity>
           </View>
         </View>
